@@ -1,0 +1,31 @@
+{
+    "name": "apache2",
+    "description": "Basic setup of Apache2 with PHP and MySQL included",
+
+    "chef_type": "role",
+    "json_class": "Chef::Role",
+
+    "override_attributes": {
+        "apache": {
+            "doc_dir": "/vagrant/web",
+            "log_dir": "/vagrant/logs",
+            "contact": "jamie@jamiehurst.co.uk"
+        },
+        "mysql": {
+            "allow_remote_root": true,
+            "server_root_password": "root"
+        }
+    },
+
+    "run_list": [
+        "recipe[mysql::server]",
+        "recipe[apache2]",
+        "recipe[apache2::mod_rewrite]",
+        "recipe[php]",
+        "recipe[php::module_mysql]",
+        "recipe[php::module_curl]",
+        "recipe[php::module_gd]",
+        "recipe[apache2::mod_php5]"
+    ]
+
+}
