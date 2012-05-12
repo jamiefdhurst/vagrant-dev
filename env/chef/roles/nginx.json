@@ -9,7 +9,8 @@
         "nginx": {
             "doc_dir": "/vagrant/web",
             "log_dir": "/vagrant/logs",
-            "contact": "jamie@jamiehurst.co.uk"
+            "contact": "jamie@jamiehurst.co.uk",
+            "php_framework": false
         },
         "mysql": {
             "allow_remote_root": true,

@@ -6,6 +6,13 @@ server {
     root <%= node[:nginx][:doc_dir] %>;
     index index.html index.htm index.php;
 
+    <% if node[:nginx][:php_framework] -%>
+        location / {
+            try_files $uri $uri/ /index.php?$args;
+        }
+    <% end -%>
+
+
     location ~ \.php$ {
         include /etc/nginx/fastcgi_params;
         fastcgi_pass unix:/var/run/php5-fpm.sock;
