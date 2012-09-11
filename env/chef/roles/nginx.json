@@ -19,14 +19,13 @@
     },
 
     "run_list": [
-        "recipe[apt]",
-        "recipe[mysql::server]",
-        "recipe[nginx]",
-        "recipe[php]",
-        "recipe[php::module_mysql]",
-        "recipe[php::module_curl]",
-        "recipe[php::module_gd]",
-        "recipe[php-fpm]"
+         "recipe[apt]"
+        ,"recipe[mysql::server]"
+        ,"recipe[nginx]"
+        ,"recipe[php-fpm]"
+        ,"recipe[php::module_mysql]"
+        ,"recipe[php::module_curl]"
+        ,"recipe[php::module_gd]"
     ]
 
 }
