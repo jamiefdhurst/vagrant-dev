@@ -16,3 +16,6 @@
 [submodule "env/chef/cookbooks/openssl"]
 	path = env/chef/cookbooks/openssl
 	url = git@github.com:jamiefdhurst/openssl.git
+[submodule "env/chef/cookbooks/nginx"]
+	path = env/chef/cookbooks/nginx
+	url = git@github.com:jamiefdhurst/nginx.git
