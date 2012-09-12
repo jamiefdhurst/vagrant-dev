@@ -7,9 +7,6 @@
 [submodule "env/chef/cookbooks/mysql"]
 	path = env/chef/cookbooks/mysql
 	url = git@github.com:jamiefdhurst/mysql.git
-[submodule "env/chef/cookbooks/nginx"]
-	path = env/chef/cookbooks/nginx
-	url = git@github.com:jamiefdhurst/mysql.git
 [submodule "env/chef/cookbooks/php"]
 	path = env/chef/cookbooks/php
 	url = git@github.com:jamiefdhurst/php
