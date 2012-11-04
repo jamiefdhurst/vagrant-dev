@@ -11,6 +11,9 @@ Vagrant::Config.run do |config|
     # Enable this line to modify the memory the VM has allocated
     #config.vm.customize ["modifyvm", :id, "--memory", "512"]
 
+    # Enable symlinks on shared folder
+    config.vm.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/v-root", "1"]
+
     Vagrant::Config.run do |config|
 
         config.vm.provision :chef_solo do |chef|
