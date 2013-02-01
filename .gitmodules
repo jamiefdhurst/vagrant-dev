@@ -1,21 +1,21 @@
 [submodule "env/chef/cookbooks/apt"]
 	path = env/chef/cookbooks/apt
-	url = git@github.com:jamiefdhurst/apt
+	url = git://github.com/jamiefdhurst/apt.git
 [submodule "env/chef/cookbooks/apache2"]
 	path = env/chef/cookbooks/apache2
-	url = git@github.com:jamiefdhurst/apache2
+	url = git://github.com/jamiefdhurst/apache2.git
 [submodule "env/chef/cookbooks/mysql"]
 	path = env/chef/cookbooks/mysql
-	url = git@github.com:jamiefdhurst/mysql.git
+	url = git://github.com/jamiefdhurst/mysql.git
 [submodule "env/chef/cookbooks/php"]
 	path = env/chef/cookbooks/php
-	url = git@github.com:jamiefdhurst/php
+	url = git://github.com/jamiefdhurst/php
 [submodule "env/chef/cookbooks/php-fpm"]
 	path = env/chef/cookbooks/php-fpm
-	url = git@github.com:jamiefdhurst/php-fpm.git
+	url = git://github.com/jamiefdhurst/php-fpm.git
 [submodule "env/chef/cookbooks/openssl"]
 	path = env/chef/cookbooks/openssl
-	url = git@github.com:jamiefdhurst/openssl.git
+	url = git://github.com/jamiefdhurst/openssl.git
 [submodule "env/chef/cookbooks/nginx"]
 	path = env/chef/cookbooks/nginx
-	url = git@github.com:jamiefdhurst/nginx.git
+	url = git://github.com/jamiefdhurst/nginx.git
