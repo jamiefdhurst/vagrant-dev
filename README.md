@@ -9,8 +9,10 @@ doing so.
 This environment currently supports either Apache2 or nginx. Check in the
 Vagrantfile and uncomment one of the following lines:
 
-    # Uncomment as necessary for apache2 or nginx
-    #shell.path = "env/provision-apache2.sh"
-    #shell.path = "env/provision-nginx.sh"
+```ruby
+# Uncomment as necessary for apache2 or nginx
+#shell.path = "env/provision-apache2.sh"
+#shell.path = "env/provision-nginx.sh"
+```
 
 To set individual options, refer to the shell files listed above.
