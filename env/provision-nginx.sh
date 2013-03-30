@@ -42,7 +42,7 @@ sed -i "s/{USER}/$NGINX_USER/" /etc/nginx/nginx.conf
 cp /vagrant/env/support/nginx-site.conf /etc/nginx/sites-available/vagrant
 sed -i "s/{DOCUMENT_ROOT}/$NGINX_DOCUMENT_ROOT/g" /etc/nginx/sites-available/vagrant
 sed -i "s/{LOG_DIR}/$NGINX_LOG_DIR/g" /etc/nginx/sites-available/vagrant
-if [ "$NGINX_FRAMEWORK" -q "1" ]; then
+if [ "$NGINX_FRAMEWORK" -eq "1" ]; then
     sed -i "s/{FRAMEWORK}//g" /etc/nginx/sites-available/vagrant
     sed -i "s/{FRAMEWORK_ROOT}/$NGINX_FRAMEWORK_ROOT/g" /etc/nginx/sites-available/vagrant
 else
@@ -56,6 +56,14 @@ output $GREEN "Finished configuring Nginx."
 output $BLUE "Setting up PHP..."
 cp /vagrant/env/support/php.ini /etc/php5/cgi/
 cp /vagrant/env/support/php.ini /etc/php5/cli/
+wget -O php-fastcgi-deb.sh http://library.linode.com/assets/1133-php-fastcgi-deb-2.sh
+mv /root/php-fastcgi-deb.sh /usr/bin/php-fastcgi
+chmod +x /usr/bin/php-fastcgi
+wget -O init-php-fastcgi-deb.sh http://library.linode.com/assets/1132-init-php-fastcgi-deb-2.sh
+mv /root/init-php-fastcgi-deb.sh /etc/init.d/php-fastcgi
+chmod +x /etc/init.d/php-fastcgi
+/etc/init.d/php-fastcgi start
+update-rc.d php-fastcgi defaults
 output $GREEN "Finished configuring PHP."
 
 # MySQL
