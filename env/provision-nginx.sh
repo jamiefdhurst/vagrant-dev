@@ -32,7 +32,7 @@ output $GREEN "Software installed."
 
 # Hostname
 echo "$1" > /etc/hostname
-sed -i "s/precise32/$1" /etc/hosts
+sed -i "s/precise32/$1/" /etc/hosts
 service hostname start
 
 # Nginx
