@@ -67,8 +67,13 @@ update-rc.d php-fastcgi defaults
 output $GREEN "Finished configuring PHP."
 
 # MySQL
-output $BLUE "Setting up MySQL"
+output $BLUE "Setting up MySQL..."
+cp /vagrant/env/support/my.cnf /etc/mysql/my.cnf
 mysqladmin -u root password $MYSQL_ROOT_PASSWORD
+echo "create user 'root'@'%' identified by '$MYSQL_ROOT_PASSWORD';" | mysql -u root -p$MYSQL_ROOT_PASSWORD
+echo "grant all privileges on *.* to 'root'@'%' with grant option;" | mysql -u root -p$MYSQL_ROOT_PASSWORD
+echo "flush privileges;" | mysql -u root -p$MYSQL_ROOT_PASSWORD
+service mysql restart
 output $GREEN "Finished configuring MySQL."
 
 # --Optional software
