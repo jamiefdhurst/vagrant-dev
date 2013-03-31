@@ -56,11 +56,8 @@ output $GREEN "Finished configuring Nginx."
 output $BLUE "Setting up PHP..."
 cp /vagrant/env/support/php.ini /etc/php5/cgi/
 cp /vagrant/env/support/php.ini /etc/php5/cli/
-wget -O php-fastcgi-deb.sh http://library.linode.com/assets/1133-php-fastcgi-deb-2.sh
-mv /root/php-fastcgi-deb.sh /usr/bin/php-fastcgi
-chmod +x /usr/bin/php-fastcgi
-wget -O init-php-fastcgi-deb.sh http://library.linode.com/assets/1132-init-php-fastcgi-deb-2.sh
-mv /root/init-php-fastcgi-deb.sh /etc/init.d/php-fastcgi
+cp /vagrant/env/support/php-fastcgi /etc/init.d/php-fastcgi
+sed -i "s/{USER}/$NGINX_USER/g" /etc/init.d/php-fastcgi
 chmod +x /etc/init.d/php-fastcgi
 /etc/init.d/php-fastcgi start
 update-rc.d php-fastcgi defaults
