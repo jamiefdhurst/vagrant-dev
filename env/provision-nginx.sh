@@ -78,6 +78,9 @@ output $GREEN "Finished configuring MySQL."
 # ZSH
 box_install_zsh
 
+# Composer
+box_install_composer
+
 # -- Register the box
 box_register
 

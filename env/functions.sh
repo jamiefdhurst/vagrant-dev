@@ -40,3 +40,11 @@ box_install_zsh() {
     chown vagrant /home/vagrant/.oh-my-zsh
     output $GREEN "ZSH installed."
 }
+
+# Install composer
+box_install_composer() {
+    output $BLUE "Installing composer..."
+    curl -sS https://getcomposer.org/installer | php
+    mv composer.phar /usr/local/bin/composer
+    output $GREEN "Composer installed"
+}
