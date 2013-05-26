@@ -11,6 +11,9 @@ APACHE2_GROUP="www-data"
 # MySQL settings
 MYSQL_ROOT_PASSWORD="root"
 
+# ZSH Settings
+ZSH_ENABLED="1"
+
 # --Require the functions file
 source /vagrant/env/functions.sh
 
@@ -65,7 +68,9 @@ output $GREEN "Finished configuring MySQL."
 # --Optional software
 
 # ZSH
-box_install_zsh
+if [ $ZSH_ENABLED == "1" ]; then
+    box_install_zsh
+fi
 
 # Composer
 box_install_composer

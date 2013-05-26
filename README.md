@@ -6,8 +6,17 @@ doing so.
 
 ##Support
 
-This environment currently supports either Apache2 or nginx. Check in the
-Vagrantfile and uncomment one of the following lines:
+This environment currently supports either Apache2 or Nginx. Each provisioner
+includes the following software:
+* PHP 5.3 (Ubuntu LTS latest)
+* MySQL
+* ZSH (including oh-my-zsh)
+* Composer
+
+##Environments
+
+To run either Apache or Nginx, check in the Vagrantfile and uncomment one of
+the following lines:
 
 ```ruby
 # Uncomment as necessary for apache2 or nginx
@@ -15,4 +24,7 @@ Vagrantfile and uncomment one of the following lines:
 #shell.path = "env/provision-nginx.sh"
 ```
 
-To set individual options, refer to the shell files listed above.
+##Configuration
+
+To set individual options, refer to the provisioner shell files listed above.
+All options are listed at the top of the files.
