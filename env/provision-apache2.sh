@@ -12,7 +12,7 @@ APACHE2_GROUP="www-data"
 MYSQL_ROOT_PASSWORD="root"
 
 # ZSH Settings
-ZSH_ENABLED="1"
+ZSH_ENABLED="0"
 
 # --Require the functions file
 source /vagrant/env/functions.sh
