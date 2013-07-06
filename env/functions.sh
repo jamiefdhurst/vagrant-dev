@@ -16,7 +16,6 @@ output () {
 # Update the box - common functionality
 box_update () {
     output $BLUE "Updating apt-get sources..."
-    export DEBIAN_FRONTEND=noninteractive
     apt-get -qq -y update
     apt-get -qq -y upgrade
 }

@@ -27,6 +27,7 @@ if [ -e "/home/vagrant/.provisioned" ]; then
 fi
 
 # # --Update the box
+export DEBIAN_FRONTEND=noninteractive
 box_update
 
 # # --Install required software
