@@ -9,6 +9,9 @@ NGINX_USER="www-data"
 NGINX_FRAMEWORK="1"
 NGINX_FRAMEWORK_ROOT="index.php"
 
+# PHP settings
+PHP_EXTRA_MODULES="php5-gd php5-curl"
+
 # MySQL settings
 MYSQL_ROOT_PASSWORD="root"
 

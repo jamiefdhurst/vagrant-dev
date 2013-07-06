@@ -8,6 +8,9 @@ APACHE2_LOG_DIR="\/vagrant\/logs"
 APACHE2_USER="www-data"
 APACHE2_GROUP="www-data"
 
+# PHP settings
+PHP_EXTRA_MODULES="php5-gd php5-curl"
+
 # MySQL settings
 MYSQL_ROOT_PASSWORD="root"
 
