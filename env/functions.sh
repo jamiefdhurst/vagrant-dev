@@ -25,6 +25,14 @@ box_register () {
     echo 'Box provisioned - `date`' > /home/vagrant/.provisioned
 }
 
+# Install memcached
+box_install_memcached() {
+    output $BLUE "Installing Memcached..."
+    apt-get -qq -y install memcached php5-memcached
+    service php-fastcgi restart
+    output $GREEN "Memcached installed."
+}
+
 # Install ZSH
 box_install_zsh() {
     output $BLUE "Installing ZSH and oh-my-zsh..."

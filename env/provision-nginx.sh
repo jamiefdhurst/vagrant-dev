@@ -15,6 +15,9 @@ PHP_EXTRA_MODULES="php5-gd php5-curl"
 # MySQL settings
 MYSQL_ROOT_PASSWORD="root"
 
+# Memcached Settings
+MEMCACHED_ENABLED="0"
+
 # ZSH Settings
 ZSH_ENABLED="0"
 
@@ -81,6 +84,11 @@ service mysql restart
 output $GREEN "Finished configuring MySQL."
 
 # --Optional software
+
+# Memcached
+if [ $MEMCACHED_ENABLED == "1" ]; then
+    box_install_memached
+fi
 
 # ZSH
 if [ $ZSH_ENABLED == "1" ]; then
