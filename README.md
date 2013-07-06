@@ -10,6 +10,7 @@ This environment currently supports either Apache2 or Nginx. Each provisioner
 includes the following software:
 * PHP 5.3 (Ubuntu LTS latest)
 * MySQL
+* Memcached
 * ZSH (including oh-my-zsh)
 * Composer
 
