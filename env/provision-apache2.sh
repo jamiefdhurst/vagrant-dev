@@ -45,7 +45,9 @@ sed -i "s/{GROUP}/$APACHE2_GROUP/" /etc/apache2/apache2.conf
 cp /vagrant/env/support/apache2-site.conf /etc/apache2/sites-available/vagrant
 sed -i "s/{DOCUMENT_ROOT}/$APACHE2_DOCUMENT_ROOT/g" /etc/apache2/sites-available/vagrant
 sed -i "s/{LOG_DIR}/$APACHE2_LOG_DIR/g" /etc/apache2/sites-available/vagrant
+rm /etc/apache2/sites-enabled/*
 ln -s /etc/apache2/sites-available/vagrant /etc/apache2/sites-enabled/
+a2enmod rewrite
 service apache2 restart
 output $GREEN "Finished configuring Apache2."
 

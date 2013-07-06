@@ -1,4 +1,4 @@
-#PHP/Vagrant Development Environment
+#Vagrant PHP Development Environment
 
 This development environment is intended as a starter for those wanting to use
 Vagrant to develop PHP applications, and includes the necessary software for
