@@ -35,7 +35,7 @@ box_update
 
 # # --Install required software
 output $BLUE "Installing software..."
-apt-get -qq -y install nginx mysql-server php5 php5-cgi php5-cli php5-mysql spawn-fcgi
+apt-get -qq -y install nginx mysql-server php5 php5-cgi php5-cli php5-mysql spawn-fcgi $PHP_EXTRA_MODULES
 output $GREEN "Software installed."
 
 # --Setup the software

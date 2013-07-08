@@ -34,7 +34,7 @@ box_update
 
 # # --Install required software
 output $BLUE "Installing software..."
-apt-get -qq -y install apache2 mysql-server php5 php5-cli php5-mysql
+apt-get -qq -y install apache2 mysql-server php5 php5-cli php5-mysql $PHP_EXTRA_MODULES
 output $GREEN "Software installed."
 
 # --Setup the software
@@ -75,7 +75,7 @@ service mysql restart
 output $GREEN "Finished configuring MySQL."
 
 # --Optional software
- 
+
 # Memcached
 if [ $MEMCACHED_ENABLED == "1" ]; then
     box_install_memached
