@@ -1,0 +1,22 @@
+<VirtualHost *:80>
+  # Admin email, Server Name (domain name), and any aliases
+    ServerAdmin devops@hurstdev.co.uk
+    ServerName  localhost
+
+  # Index file and Document Root (where the public files are located)
+    DirectoryIndex index.html index.php
+    DocumentRoot /vagrant/public
+
+  # Log file locations
+    LogLevel warn
+    ErrorLog  /vagrant/log/error.log
+    CustomLog /vagrant/log/access.log combined
+
+  # Directory specifics & VM workarounds
+    <Directory /vagrant/public>
+        AllowOverride All
+        Order allow,deny
+        Allow from all
+        EnableSendfile off
+    </Directory>
+</VirtualHost>
