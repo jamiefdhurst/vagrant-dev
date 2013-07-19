@@ -1,0 +1,19 @@
+<VirtualHost *:80>
+    ServerAdmin vagrant@localhost
+
+    DocumentRoot /vagrant/web
+    <Directory />
+            Options FollowSymLinks
+            AllowOverride None
+    </Directory>
+    <Directory /vagrant/web/>
+            Options Indexes FollowSymLinks MultiViews
+            AllowOverride All
+            Order allow,deny
+            allow from all
+    </Directory>
+
+    ErrorLog /vagrant/logs/error.log
+    CustomLog /vagrant/logs/access.log combined
+
+</VirtualHost>
