@@ -4,6 +4,7 @@ class apache {
 
   package { $packages:
     ensure => present,
+    require => Exec["apt-get update"]
   }
 
   service { "apache2":
@@ -15,7 +16,7 @@ class apache {
     path    => "/etc/apache2/apache2.conf",
     ensure  => file,
     require => Package["apache2"],
-    source  => "/vagrant/vagrant/support/apache2.conf",
+    source  => "/vagrant/vagrant/support/apache.conf",
     notify  => Service["apache2"]
   }
 

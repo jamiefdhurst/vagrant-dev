@@ -6,11 +6,10 @@ class php {
         require => Exec["apt-get update"]
     }
 
-    file { "apache2-conf":
-        path    => "/etc/php5/cgi/php.ini",
+    file { "php5-conf":
+        path    => "/etc/php5/fpm/php.ini",
         ensure  => file,
         require => Package["php5"],
-        source  => "/vagrant/vagrant/support/php.ini",
-        notify  => Service["php5-fpm"]
+        source  => "/vagrant/vagrant/support/php.ini"
     }
 }
