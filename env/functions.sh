@@ -33,10 +33,24 @@ box_install_memcached() {
     output $GREEN "Memcached installed."
 }
 
+#Install CURL
+box_install_curl() {
+    output $BLUE "Installing CURL..."
+    apt-get -qq -y install curl
+    output $GREEN "CURL installed."
+}
+
+#Install Git
+box_install_git() {
+    output $BLUE "Installing Git..."
+    apt-get -qq -y install git
+    output $GREEN "Git installed."
+}
+
 # Install ZSH
 box_install_zsh() {
     output $BLUE "Installing ZSH and oh-my-zsh..."
-    apt-get -qq -y install curl git zsh
+    apt-get -qq -y install zsh
     chsh -s /bin/zsh vagrant
     curl -s -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
     sed -i 's/robbyrussell/agnoster/' /root/.zshrc
