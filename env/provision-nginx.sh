@@ -33,6 +33,9 @@ fi
 export DEBIAN_FRONTEND=noninteractive
 box_update
 
+box_install_curl
+box_install_git
+
 # # --Install required software
 output $BLUE "Installing software..."
 apt-get -qq -y install nginx mysql-server php5 php5-cgi php5-cli php5-mysql spawn-fcgi $PHP_EXTRA_MODULES
