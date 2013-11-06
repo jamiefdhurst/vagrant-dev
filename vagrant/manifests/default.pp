@@ -5,7 +5,7 @@ Exec {
 
 include bootstrap 
 include other
-include apache
+include $service
 include php
 # include phpmyadmin
 include sendmail
