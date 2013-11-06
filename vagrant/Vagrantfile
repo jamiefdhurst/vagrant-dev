@@ -1,9 +1,10 @@
 Vagrant.configure("2") do |config|
 
     # Let's have some variables set up front so we can modify them.
+    $logsDir    = "/vagrant/logs"   # Server side
     $ram        = "512"
-    $rootDir    = "/pub"
-    $service    = "nginx"
+    $rootDir    = "/pub"            # Local side
+    $service    = "nginx"           # nginx|apache
 
     # Configure virtualbox to allow $ram-MB memory and symlinks
     config.vm.provider :virtualbox do |vb|
