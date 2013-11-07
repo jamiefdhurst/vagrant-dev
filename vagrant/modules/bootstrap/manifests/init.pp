@@ -19,6 +19,6 @@ class bootstrap {
   file { "hosts":
     path    => "/etc/hosts",
     ensure  => file,
-    content  => template("/vagrant/vagrant/manifests/hosts.erb"),
+    content  => template("bootstrap/hosts.erb"),
   }
 }
