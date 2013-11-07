@@ -3,8 +3,10 @@ Exec {
   path => ["/usr/bin", "/bin", "/usr/sbin", "/sbin", "/usr/local/bin", "/usr/local/sbin"]
 }
 
-include bootstrap 
-include other
+include bootstrap
 include $service
 include php
+if $database != "" {
+  include $database
+}
 include sendmail
