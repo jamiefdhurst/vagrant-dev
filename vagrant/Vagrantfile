@@ -48,6 +48,7 @@ Vagrant.configure('2') do |config|
         :newest_php => $newest_php,
         :ram => $ram,
         :root_dir => $root_dir,
+        :sendmail => $sendmail,
         :server_admin => $server_admin,
         :service => $service,
     }

@@ -13,6 +13,7 @@ module VConfig
   $port         = 8080 # Perhaps you fancy different port?
   $ram          = '512' # Amount of RAM allowed for this machine.
   $root_dir     = '/pub' # Local side path to the project content.
+  $sendmail     = 1 # Do you wish to include sendmail to your box?
   $server_admin = 'webmaster@localhost' # E-mail address for the admin. Fake will do...
   $service      = 'nginx' # nginx|apache2
 

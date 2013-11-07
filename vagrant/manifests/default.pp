@@ -9,7 +9,9 @@ include php
 if $database != "" {
   include $database
 }
-include sendmail
+if $sendmail == 1 {
+  include sendmail
+}
 if $composer == 1 {
   include composer
 }
