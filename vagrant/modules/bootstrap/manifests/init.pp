@@ -1,5 +1,5 @@
 class bootstrap { 
-  $packages = ["build-essential", "curl"]
+  $packages = ["build-essential", "curl", "git"]
   
   package { $packages:
       ensure => present,
@@ -19,6 +19,6 @@ class bootstrap {
   file { "hosts":
     path    => "/etc/hosts",
     ensure  => file,
-    content  => template("/vagrant/vagrant/manifests/hosts.erb"),
+    content  => template("bootstrap/hosts.erb"),
   }
 }

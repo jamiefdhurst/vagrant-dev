@@ -14,7 +14,7 @@ class nginx {
     path    => "/etc/nginx/sites-available/vagrant",
     ensure  => file,
     require => Package["nginx"],
-    content  => template("/vagrant/vagrant/manifests/nginx.erb"),
+    content  => template("nginx/nginx.erb"),
     notify  => Service["nginx"],
   }
 

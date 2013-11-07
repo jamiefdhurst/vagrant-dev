@@ -14,7 +14,7 @@ class apache2 {
     path    => "/etc/apache2/sites-available/default",
     ensure  => file,
     require => Package["apache2"],
-    content  => template("/vagrant/vagrant/manifests/apache.erb"),
+    content  => template("apache2/apache.erb"),
     notify  => Service["apache2"],
   }
 
