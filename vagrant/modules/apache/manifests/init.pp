@@ -13,7 +13,7 @@ class apache {
     path    => "/etc/apache2/sites-available/default",
     ensure  => file,
     require => Package["apache2"],
-    source  => "/vagrant/vagrant/manifests/default.vhost",
+    content  => template("/vagrant/vagrant/manifests/apache.erb"),
     notify  => Service["apache2"]
   }
 

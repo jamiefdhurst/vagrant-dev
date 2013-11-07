@@ -13,7 +13,7 @@ class nginx {
     path    => "/etc/nginx/sites-available/vagrant",
     ensure  => file,
     require => Package["nginx"],
-    source  => "/vagrant/vagrant/manifests/vagrant",
+    content  => template("/vagrant/vagrant/manifests/nginx.erb"),
     notify  => Service["nginx"]
   }
 }
