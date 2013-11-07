@@ -7,5 +7,4 @@ include bootstrap
 include other
 include $service
 include php
-# include phpmyadmin
 include sendmail
