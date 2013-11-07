@@ -1,5 +1,5 @@
 class mailcatcher {
-  $packages = ["sqlite3", "libsqlite3-dev"]
+  $packages = ["libsqlite3-dev"]
 
   package { $packages:
     ensure => present,
@@ -7,15 +7,23 @@ class mailcatcher {
   }
 
   package { 'mailcatcher':
-    ensure   => 'installed',
-    provider => 'gem',
+    ensure   => installed,
+    provider => gem,
+    require => Package['libsqlite3-dev'],
+  }
+
+  file { '/etc/init/mailcatcher.conf':
+    content => template('mailcatcher/upstart.erb'),
+    alias => 'mailcatcher.conf'
   }
 
   service { 'mailcatcher':
     ensure => running,
-    require => Package["mailcatcher"],
+    require => [
+      File['mailcatcher.conf'],
+      Package["mailcatcher"]
+    ],
     provider => upstart,
     hasstatus => true,
-    subscribe => Class['mailcatcher::configs'],
   }
 }
