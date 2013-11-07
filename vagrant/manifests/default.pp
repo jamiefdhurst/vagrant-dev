@@ -13,3 +13,6 @@ include sendmail
 if $composer == 1 {
   include composer
 }
+if $mailcatcher == 1 {
+  include mailcatcher
+}
