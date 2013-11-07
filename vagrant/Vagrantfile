@@ -1,10 +1,15 @@
 Vagrant.configure("2") do |config|
 
     # Let's have some variables set up front so we can modify them.
-    $logsDir    = "/vagrant/logs"   # Server side
-    $ram        = "512"
-    $rootDir    = "/pub"            # Local side
-    $service    = "nginx"           # nginx|apache
+    $address        = "localhost"                   # What would be the address you will visit to view your project?
+    $addressIP      = "127.0.0.1"                   # The internal IP address... Just in case.
+    $index          = "index.php"                   # What file should be read.
+    $logsDir        = "/vagrant/logs"               # Server side path to logs.
+    $port           = "8080"                        # The port of the application. It will be read as $address:8080 in your browser.
+    $ram            = "512"                         # Amount of RAM allowed for this machine.
+    $rootDir        = "/pub"                        # Local side path to the project content.
+    $serverAdmin    = "webmaster@localhost"         # E-mail address for the admin. Fake will do...
+    $service        = "nginx"                       # nginx|apache
 
     # Configure virtualbox to allow $ram-MB memory and symlinks
     config.vm.provider :virtualbox do |vb|
@@ -17,7 +22,7 @@ Vagrant.configure("2") do |config|
     config.vm.box_url = "http://files.vagrantup.com/precise32.box"
 
     # Set up network for HTTP/HTTPS and MySQL
-    config.vm.network :forwarded_port, guest: 80, host: 8080
+    config.vm.network :forwarded_port, guest: 80, host: $port
     config.vm.network :forwarded_port, guest: 443, host: 8443
     config.vm.network :forwarded_port, guest: 1080, host: 1080
     config.vm.network :forwarded_port, guest: 3306, host: 3306
@@ -29,5 +34,18 @@ Vagrant.configure("2") do |config|
         puppet.manifests_path = "vagrant/manifests"
         puppet.manifest_file = "default.pp"
         puppet.module_path = "vagrant/modules"
+
+        # Pass the variables through!
+        puppet.facter = {
+              "address"     => $address,
+              "addressIP"   => $addressIP,
+              "index"       => $index,
+              "logsDir"     => $logsDir,
+              "port"        => $port,
+              "ram"         => $ram,
+              "rootDir"     => $rootDir,
+              "serverAdmin" => $serverAdmin,
+              "service"     => $service,
+            }
     end
 end
