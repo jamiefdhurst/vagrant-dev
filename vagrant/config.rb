@@ -9,6 +9,7 @@ module VConfig
   $logs_dir     = '/vagrant/logs' # Server side path to logs.
   $mailcatcher  = 0 # Would you like to install MailCatcher?
   $memcache     = 1 # Would you like to install and set up Memcache?
+  $newest_php   = 0 # Would you like to install newest PHP version possible or stick with official version from repos?
   $port         = 8080 # Perhaps you fancy different port?
   $ram          = '512' # Amount of RAM allowed for this machine.
   $root_dir     = '/pub' # Local side path to the project content.
