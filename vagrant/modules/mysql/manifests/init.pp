@@ -6,7 +6,7 @@ class mysql {
     require => Package["php5"]
   }
 
-  service { "mysqld":
+  service { "mysql":
     ensure => running,
     require => [
       Package["mysql-server"],
@@ -18,7 +18,7 @@ class mysql {
     path => "/etc/mysql/my.cnf",
     ensure => file,
     content => template("mysql/conf.erb"),
-    notify => Service["mysqld"]
+    notify => Service["mysql"]
   }
 
   exec { "mysql password":
@@ -33,20 +33,23 @@ class mysql {
 
   exec { "mysql user":
     require => Exec["mysql password"],
+    unless => "cat /root/mysql-1",
     path => ["/bin", "/usr/bin"],
-    command => "echo \"create user 'root'@'%' identified by '$db_password';\" | mysql -u root -p$db_password",
+    command => "echo \"create user 'root'@'%' identified by '$db_password';\" | mysql -u root -p$db_password; echo '1' > /root/mysql-1",
   }
 
   exec { "mysql grant privileges":
     require => Exec["mysql user"],
+    unless => "cat /root/mysql-2",
     path => ["/bin", "/usr/bin"],
-    command => "echo \"grant all privileges on *.* to 'root'@'%' with grant option;\" | mysql -u root -p$db_password",
+    command => "echo \"grant all privileges on *.* to 'root'@'%' with grant option;\" | mysql -u root -p$db_password; echo '1' > /root/mysql-2",
   }
 
   exec { "mysql flush privileges":
     require => Exec["mysql grant privileges"],
+    unless => "cat /root/mysql-3",
     path => ["/bin", "/usr/bin"],
-    command => "echo \"flush privileges;\" | mysql -u root -p$db_password",
-    notify => Service["mysqld"]
+    command => "echo \"flush privileges;\" | mysql -u root -p$db_password; echo '1' > /root/mysql-3",
+    notify => Service["mysql"]
   }
 }
