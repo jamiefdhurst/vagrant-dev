@@ -35,6 +35,8 @@ Vagrant.configure('2') do |config|
         :database => $database,
         :index => $index,
         :logs_dir => $logs_dir,
+        :mailcatcher => $mailcatcher,
+        :memcache => $memcache,
         :ram => $ram,
         :root_dir => $root_dir,
         :server_admin => $server_admin,

@@ -16,3 +16,6 @@ if $composer == 1 {
 if $mailcatcher == 1 {
   include mailcatcher
 }
+if $memcache == 1 {
+  include memcache
+}
