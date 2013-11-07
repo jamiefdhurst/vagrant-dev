@@ -2,20 +2,20 @@ class nginx {
 
   package { "nginx":
     ensure => present,
-    require => Exec["apt-get update"]
+    require => Exec["apt-get update"],
   }
 
   service { "nginx":
     ensure => running,
     require => Package["nginx"],
   }
- 
+
   file { "default-nginx":
     path    => "/etc/nginx/sites-available/vagrant",
     ensure  => file,
     require => Package["nginx"],
     content  => template("/vagrant/vagrant/manifests/nginx.erb"),
-    notify  => Service["nginx"]
+    notify  => Service["nginx"],
   }
 
   file { "vagrant":
@@ -23,6 +23,6 @@ class nginx {
     ensure  => link,
     require => Package["nginx"],
     target  => "/etc/nginx/sites-available/vagrant",
-    notify  => Service["nginx"]
+    notify  => Service["nginx"],
   }
 }
