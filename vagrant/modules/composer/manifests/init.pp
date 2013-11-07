@@ -1,3 +1,4 @@
+# Base - https://github.com/dazz/puppet-composer
 class composer(
 $target_dir      = '/usr/local/bin',
 $composer_file   = 'composer',
@@ -16,7 +17,7 @@ $tmp_path        = '/home/vagrant') {
       package { 'curl': ensure => present, }
     }
 
-    exec { 'download_composer':
+    exec { 'download composer':
       command     => 'curl -s http://getcomposer.org/installer | php',
       cwd         => $tmp_path,
       require     => Package['curl', 'php5-cli'],
@@ -29,7 +30,7 @@ $tmp_path        = '/home/vagrant') {
     package {'wget': ensure => present, }
     }
 
-    exec { 'download_composer':
+    exec { 'download composer':
       command     => 'wget http://getcomposer.org/composer.phar -O composer.phar',
       cwd         => $tmp_path,
       require     => Package['wget'],
@@ -50,7 +51,7 @@ $tmp_path        = '/home/vagrant') {
     ensure      => present,
     source      => "$tmp_path/composer.phar",
     require     => [
-      Exec['download_composer'],
+      Exec['download composer'],
       File[$target_dir]
     ],
     group       => 'staff',
@@ -58,7 +59,7 @@ $tmp_path        = '/home/vagrant') {
   }
 
   # run composer self-update
-  exec { 'update_composer':
+  exec { 'update composer':
     command     => "$target_dir/$composer_file self-update",
     require     => File["$target_dir/$composer_file"],
   }
