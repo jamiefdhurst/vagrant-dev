@@ -17,13 +17,13 @@ Vagrant.configure('2') do |config|
   config.vm.network :forwarded_port, guest: 80, host: $port
   config.vm.network :forwarded_port, guest: 443, host: 8443
 
-  if $database != ''
+  if $database != '' # If database is set.
     config.vm.network :forwarded_port, guest: 3306, host: 3306
   end
-  if $mailcatcher == 1
+  if $mailcatcher == 1 # If MailCatcher is requested.
     config.vm.network :forwarded_port, guest: 1080, host: 1080
   end
-   if $memcache == 1
+   if $memcache == 1 # If Memcache will be installed.
      config.vm.network :forwarded_port, guest: 11211, host: 11211
    end
 
