@@ -3,6 +3,7 @@ class memcache {
 
   package { $packages:
     ensure => present,
-    require => Package["build-essential"]
+    require => Package["build-essential"],
+    notify => Service["php5-fpm"],
   }
 }
