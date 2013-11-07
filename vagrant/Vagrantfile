@@ -14,10 +14,18 @@ Vagrant.configure('2') do |config|
   config.vm.box_url = 'http://files.vagrantup.com/precise32.box'
 
   # Set up network for HTTP/HTTPS and MySQL
-  config.vm.network :forwarded_port, guest: 80, host: 8080
+  config.vm.network :forwarded_port, guest: 80, host: $port
   config.vm.network :forwarded_port, guest: 443, host: 8443
-  config.vm.network :forwarded_port, guest: 1080, host: 1080
-  config.vm.network :forwarded_port, guest: 3306, host: 3306
+
+  if $database != ''
+    config.vm.network :forwarded_port, guest: 3306, host: 3306
+  end
+  if $mailcatcher == 1
+    config.vm.network :forwarded_port, guest: 1080, host: 1080
+  end
+   if $memcache == 1
+     config.vm.network :forwarded_port, guest: 11211, host: 11211
+   end
 
   # config.vm.synced_folder('vagrant-root', '/vagrant', '.', :owner => 'vagrant', :group => 'vagrant', :extra => 'dmode=777,fmode=777')
 

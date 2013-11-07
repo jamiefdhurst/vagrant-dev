@@ -9,6 +9,7 @@ module VConfig
   $logs_dir     = '/vagrant/logs' # Server side path to logs.
   $mailcatcher  = 0 # Would you like to install MailCatcher?
   $memcache     = 1 # Would you like to install and set up Memcache?
+  $port         = 8080 # Perhaps you fancy different port?
   $ram          = '512' # Amount of RAM allowed for this machine.
   $root_dir     = '/pub' # Local side path to the project content.
   $server_admin = 'webmaster@localhost' # E-mail address for the admin. Fake will do...
