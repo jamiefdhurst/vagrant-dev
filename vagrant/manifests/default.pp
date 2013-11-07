@@ -10,3 +10,6 @@ if $database != "" {
   include $database
 }
 include sendmail
+if $composer == 1 {
+  include composer
+}
