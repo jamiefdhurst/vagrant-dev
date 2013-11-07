@@ -2,7 +2,7 @@ class nginx {
 
   package { "nginx":
     ensure => present,
-    require => Exec["apt-get update"],
+    require => Package["build-essential"],
   }
 
   service { "nginx":
