@@ -3,6 +3,6 @@ class sendmail {
 
     package { $packages:
         ensure => present,
-        require => Exec["apt-get update"]
+        require => Package[$service],
     }
 }

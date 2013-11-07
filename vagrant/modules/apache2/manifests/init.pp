@@ -1,7 +1,8 @@
-class apache {
+class apache2 {
 
   package { "apache2":
     ensure => present,
+    require => Package["build-essential"],
   }
  
   service { "apache2":
