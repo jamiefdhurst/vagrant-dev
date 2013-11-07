@@ -1,5 +1,5 @@
 class bootstrap { 
-  $packages = ["build-essential", "libsqllite3-dev"]
+  $packages = ["build-essential"]
   
   package { $packages:
       ensure => present,
