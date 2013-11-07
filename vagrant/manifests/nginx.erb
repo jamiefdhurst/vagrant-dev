@@ -1,15 +1,15 @@
 server {
     listen 80;
-    server_name <%= @address %> <%= @addressIP %>;
-    access_log <%= $logsDir %>/access.log;
-    error_log <%= $logsDir %>/error.log;
+    server_name <%= @boxlink %> <%= @boxip %>;
+    access_log <%= @logsdir %>/access.log;
+    error_log <%= @logsdir %>/error.log;
 
     location / {
-        root /vagrant<%= $rootDir %>;
+        root /vagrant<%= @rootdir %>;
         index index.html index.htm <%= @index %>;
         try_files $uri $uri/ /<%= @index %>?$args;
         location ~ \.php {
-                fastcgi_pass <%= @addressIP %>:9000;
+                fastcgi_pass <%= @boxip %>:9000;
                 fastcgi_index <%= @index %>;
                 include /etc/nginx/fastcgi_params;
                 fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
