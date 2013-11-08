@@ -29,6 +29,13 @@ class mariadb {
     require => Package["mariadb-server"],
   }
 
+  file { "mysql config":
+    path => "/etc/mysql/my.cnf",
+    ensure => file,
+    content => template("mysql/conf.erb"),
+    notify => Service["mysql"]
+  }
+
   exec { "mysql password":
     require => Package["mariadb-server"],
     unless => "mysqladmin -uroot -p$db_password status",
