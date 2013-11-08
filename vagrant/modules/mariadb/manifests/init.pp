@@ -10,11 +10,17 @@ class mariadb {
     notify  => [Service[$service], Exec["apt-get update"]]
   }
 
+  exec { "add-key mariadb":
+    require => File["add-repositories mariadb"],
+    path => ["/bin", "/usr/bin"],
+    command => "echo 'Please wait...' && sudo apt-get update 2> keys > /dev/null && sed -i '/NO_PUBKEY/!d;s/.*NO_PUBKEY //' keys && gpg --keyserver keyserver.ubuntu.com --recv-keys $(cat keys) && gpg --export --armor $(cat keys) | sudo apt-key add - && rm -f keys"
+  }
+
   package { $packages:
     ensure => latest,
     require => [
       Package["php5"],
-      File["add-repositories mariadb"]
+      Exec["add-key mariadb"]
     ],
   }
 
