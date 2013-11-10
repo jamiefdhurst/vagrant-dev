@@ -1,17 +1,32 @@
-class mysql {
-  $packages = ["mysql-server", "mysql-client", "php5-mysql"]
+class mariadb {
+
+  $packages = ["mariadb-server"]
+
+  # Add new repo.
+  file { "add-repositories mariadb":
+    path    => "/etc/apt/sources.list.d/mariadb.list",
+    ensure  => file,
+    content  => template("mariadb/repo.erb"),
+    notify  => [Service[$service], Exec["apt-get update"]]
+  }
+
+  exec { "add-key mariadb":
+    require => File["add-repositories mariadb"],
+    path => ["/bin", "/usr/bin"],
+    command => "echo 'Please wait...' && sudo apt-get update 2> keys > /dev/null && sed -i '/NO_PUBKEY/!d;s/.*NO_PUBKEY //' keys && gpg --keyserver keyserver.ubuntu.com --recv-keys $(cat keys) && gpg --export --armor $(cat keys) | sudo apt-key add - && rm -f keys"
+  }
 
   package { $packages:
-    ensure => present,
-    require => Package["php5"]
+    ensure => latest,
+    require => [
+      Package["php5"],
+      Exec["add-key mariadb"]
+    ],
   }
 
   service { "mysql":
     ensure => running,
-    require => [
-      Package["mysql-server"],
-      Package["mysql-client"]
-    ],
+    require => Package["mariadb-server"],
   }
 
   file { "mysql config":
@@ -22,10 +37,7 @@ class mysql {
   }
 
   exec { "mysql password":
-    require => [
-      Package["mysql-server"],
-      Package["mysql-client"]
-    ],
+    require => Package["mariadb-server"],
     unless => "mysqladmin -uroot -p$db_password status",
     path => ["/bin", "/usr/bin"],
     command => "mysqladmin -uroot password $db_password",

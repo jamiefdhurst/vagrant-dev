@@ -1,8 +1,8 @@
 class nginx {
 
-  package { ["nginx"]:
+  package { "nginx":
     ensure => present,
-    require => Exec["apt-get update"]
+    require => Package["build-essential"],
   }
 
   service { "nginx":
@@ -10,19 +10,19 @@ class nginx {
     require => Package["nginx"],
   }
 
-  file { "nginx-conf":
-    path    => "/etc/nginx/nginx.conf",
+  file { "default-nginx":
+    path    => "/etc/nginx/sites-available/vagrant",
     ensure  => file,
     require => Package["nginx"],
-    source  => "/vagrant/vagrant/support/nginx.conf",
-    notify  => Service["nginx"]
+    content  => template("nginx/nginx.erb"),
+    notify  => Service["nginx"],
   }
 
-  file { "default-nginx":
-    path    => "/etc/nginx/sites-enabled/default",
-    ensure  => file,
+  file { "vagrant":
+    path    => "/etc/nginx/sites-enabled/vagrant",
+    ensure  => link,
     require => Package["nginx"],
-    source  => "/vagrant/vagrant/support/nginx-site",
-    notify  => Service["nginx"]
+    target  => "/etc/nginx/sites-available/vagrant",
+    notify  => Service["nginx"],
   }
 }

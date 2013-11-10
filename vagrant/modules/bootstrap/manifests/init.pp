@@ -1,6 +1,6 @@
-class bootstrap {
-  $packages = ["build-essential", "curl", "git-core", "libsqlite3-dev"]
-
+class bootstrap { 
+  $packages = ["build-essential", "curl", "git"]
+  
   package { $packages:
       ensure => present,
       require => Exec["apt-get update"]
@@ -16,4 +16,9 @@ class bootstrap {
     command => '/usr/bin/apt-get update'
   }
 
+  file { "hosts":
+    path    => "/etc/hosts",
+    ensure  => file,
+    content  => template("bootstrap/hosts.erb"),
+  }
 }
