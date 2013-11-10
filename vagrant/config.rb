@@ -20,7 +20,7 @@ module VConfig
   # PHP
   $newest_php   = 0 # Would you like to install newest PHP version possible (5.5) or stick with official version from repos?
   $composer     = 1 # Would you like to use beautiful and magical composer?
-  $memcache     = 1 # Would you like to install and set up Memcache?
+  $memcache     = 0 # Would you like to install and set up Memcache?
 
   # Sendmail/mailcatcher
   $mailcatcher  = 0 # Would you like to install MailCatcher?

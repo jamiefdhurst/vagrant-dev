@@ -18,7 +18,11 @@ class mysql {
     path => "/etc/mysql/my.cnf",
     ensure => file,
     content => template("mysql/conf.erb"),
-    notify => Service["mysql"]
+    require => [
+      Package["mysql-server"],
+      Package["mysql-client"]
+    ],
+    notify => Service["mysql"],
   }
 
   exec { "mysql password":
