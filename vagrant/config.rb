@@ -18,7 +18,8 @@ module VConfig
   $db_password  = 'root' # Which password should be set up for the root user of database?
 
   # PHP
-  $newest_php   = 0 # Would you like to install newest PHP version possible (5.5) or stick with official version from repos?
+  $newest_php   = 1 # Would you like to install newest PHP possible (5.5) or stick with official version from repos?
+                    # WARNING! Currently only supports nginx, NOT apache2!
   $composer     = 1 # Would you like to use beautiful and magical composer?
   $memcache     = 0 # Would you like to install and set up Memcache?
 
