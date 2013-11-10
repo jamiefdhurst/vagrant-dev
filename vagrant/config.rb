@@ -7,7 +7,7 @@ module VConfig
   $port         = 8080 # Perhaps you fancy different port?
 
   # Apache2/Nginx
-  $service      = 'nginx' # nginx|apache2
+  $service      = 'apache2' # nginx|apache2
   $index        = 'index.php' # What file should be read.
   $server_admin = 'webmaster@localhost' # E-mail address for the admin. Fake will do...
   $logs_dir     = '/vagrant/logs' # Server side path to logs.
@@ -23,7 +23,7 @@ module VConfig
   $memcache     = 0 # Would you like to install and set up Memcache?
 
   # Sendmail/mailcatcher
-  $mailcatcher  = 0 # Would you like to install MailCatcher?
+  $mailcatcher  = 1 # Would you like to install MailCatcher?
   $sendmail     = 1 # Do you wish to include sendmail to your box?
 
 end

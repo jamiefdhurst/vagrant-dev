@@ -4,10 +4,8 @@ class php {
 
   if $newest_php == 1 {
     # Add new repo.
-    file { "add-repositories php":
-      path    => "/etc/apt/sources.list.d/ondrej-php5.list",
-      ensure  => file,
-      content  => template("php/repo.erb"),
+    exec { "add-repositories php":
+      command => "add-apt-repository ppa:ondrej/php5",
       notify  => [Service[$service], Exec["apt-get update"]]
     }
 
@@ -15,7 +13,7 @@ class php {
       ensure => latest,
       require => [
         Package[$service],
-        File["add-repositories php"]
+        Exec["add-repositories php"]
       ],
     }
 
