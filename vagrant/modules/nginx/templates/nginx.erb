@@ -1,20 +1,49 @@
-server {
-    listen 80;
-    server_name <%= @box_link %> <%= @boxip %>;
-    access_log <%= @logs_dir %>/access.log;
-    error_log <%= @logs_dir %>/error.log;
+user www-data;
+worker_processes 4;
+pid /var/run/nginx.pid;
 
-    location / {
-        root <%= @root_dir %>;
-        index index.html index.htm <%= @index %>;
-        try_files $uri $uri/ /<%= @index %>?$args;
-        location ~ \.php {
-                fastcgi_pass <%= @box_ip %>:9000;
-                fastcgi_index <%= @index %>;
-                include /etc/nginx/fastcgi_params;
-                fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+events {
+        worker_connections 768;
+        # multi_accept on;
+}
 
-                fastcgi_read_timeout 60;
-        }
-    }
+http {
+
+        ##
+        # Basic Settings
+        ##
+
+        sendfile off;
+        tcp_nopush on;
+        tcp_nodelay on;
+        keepalive_timeout 65;
+        types_hash_max_size 2048;
+        # server_tokens off;
+
+        # server_names_hash_bucket_size 64;
+        # server_name_in_redirect off;
+
+        include /etc/nginx/mime.types;
+        default_type application/octet-stream;
+
+        ##
+        # Logging Settings
+        ##
+
+        access_log /var/log/nginx/access.log;
+        error_log /var/log/nginx/error.log;
+
+        ##
+        # Gzip Settings
+        ##
+
+        gzip on;
+        gzip_disable "msie6";
+
+        ##
+        # Virtual Host Configs
+        ##
+
+        include /etc/nginx/conf.d/*.conf;
+        include /etc/nginx/sites-enabled/*;
 }
