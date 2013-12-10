@@ -10,11 +10,19 @@ class nginx {
     require => Package["nginx"],
   }
 
+  file { "nginx-conf":
+    path    => "/etc/nginx/nginx.conf",
+    ensure  => file,
+    require => Package["nginx"],
+    content  => template("nginx/nginx.erb"),
+    notify  => Service["nginx"],
+  }
+
   file { "default-nginx":
     path    => "/etc/nginx/sites-available/vagrant",
     ensure  => file,
     require => Package["nginx"],
-    content  => template("nginx/nginx.erb"),
+    content  => template("nginx/nginx-site.erb"),
     notify  => Service["nginx"],
   }
 
