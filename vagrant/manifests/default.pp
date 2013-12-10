@@ -4,20 +4,30 @@ Exec {
 }
 
 include bootstrap
-include $service
-include php
+
+if $install_rails == 1 {
+  include rails
+} else {
+  include $service
+  include php
+
+  if $composer == 1 {
+    include composer
+  }
+}
+
 if $database != "" {
   include $database
 }
+
 if $sendmail == 1 {
   include sendmail
 }
-if $composer == 1 {
-  include composer
-}
+
 if $mailcatcher == 1 {
   include mailcatcher
 }
+
 if $memcache == 1 {
   include memcache
 }

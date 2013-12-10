@@ -1,9 +1,16 @@
 class mysql {
-  $packages = ["mysql-server", "mysql-client", "php5-mysql"]
+  $packages = ["mysql-server", "mysql-client"]
 
   package { $packages:
     ensure => present,
-    require => Package["php5"]
+    require => Package["build-essential"],
+  }
+
+  if $install_rails == 0 {
+    package { "php5-mysql":
+      ensure => present,
+      require => Package["php5"]
+    }
   }
 
   service { "mysql":

@@ -3,6 +3,6 @@ class sendmail {
 
     package { $packages:
         ensure => present,
-        require => Package[$service],
+        require => Package["build-essential"],
     }
 }
