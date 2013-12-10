@@ -6,7 +6,7 @@ class mysql {
     require => Package["build-essential"],
   }
 
-  if $install_rails == 0 {
+  if $install_ruby == 0 {
     package { "php5-mysql":
       ensure => present,
       require => Package["php5"]

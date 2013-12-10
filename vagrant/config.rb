@@ -26,7 +26,7 @@ module VConfig
   $memcache     = 0 # Would you like to install and set up Memcache?
 
   # Rails
-  $install_rails= 0 # Should we install rails?
+  $install_ruby = 0 # Should we install ruby?
                     # WARNING! If yes, it will ignore Apache2/Nginx and PHP installation!
   $ruby_version = '2.0.0' # What version of ruby should be installed?
 

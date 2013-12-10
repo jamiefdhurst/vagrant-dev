@@ -1,4 +1,4 @@
-class rails {
+class ruby {
   exec { 'install rvm':
     command => "${sudo} 'curl -L https://get.rvm.io | bash -s stable'",
     creates => "${home}/.rvm/bin/rvm",

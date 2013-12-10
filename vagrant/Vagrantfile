@@ -14,7 +14,7 @@ Vagrant.configure('2') do |config|
   config.vm.box_url = 'http://files.vagrantup.com/precise32.box'
 
   # Set up network for HTTP/HTTPS and MySQL
-  if $install_rails == 1
+  if $install_ruby == 1
     config.vm.network :forwarded_port, guest: 3000, host: $port
   else
     config.vm.network :forwarded_port, guest: 80, host: $port
@@ -49,7 +49,7 @@ Vagrant.configure('2') do |config|
         :db_password => $db_password,
         :home => $home,
         :index => $index,
-        :install_rails => $install_rails,
+        :install_ruby => $install_ruby,
         :logs_dir => $logs_dir,
         :mailcatcher => $mailcatcher,
         :memcache => $memcache,

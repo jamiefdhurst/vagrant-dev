@@ -5,7 +5,7 @@ Exec {
 
 include bootstrap
 
-if $install_rails == 1 {
+if $install_ruby == 1 {
   include rails
 } else {
   include $service
