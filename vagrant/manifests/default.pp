@@ -6,9 +6,15 @@ Exec {
 include bootstrap
 
 if $install_ruby == 1 {
+  include ruby
+}
+
+include $service
+
+if $rails == 1 {
   include rails
+  include passenger
 } else {
-  include $service
   include php
 
   if $composer == 1 {

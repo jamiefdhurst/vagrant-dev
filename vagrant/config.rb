@@ -1,11 +1,11 @@
 module VConfig
 
   # General configuration
-  $ram          = '512' # Amount of RAM allowed for this machine.
   $box_link     = 'localhost' # What would be the address you will visit to view your project?
   $box_ip       = '127.0.0.1' # The internal IP address... Just in case.
   $home         = '/home/vagrant' # Where is the home directory placed?
   $port         = 8080 # Perhaps you fancy different port?
+  $ram          = '512' # Amount of RAM allowed for this machine.
   $sudo         = 'sudo -u vagrant -H bash -l -c' # If there will be any sudo actions, how should the run?
 
   # Apache2/Nginx
@@ -25,10 +25,12 @@ module VConfig
   $composer     = 1 # Would you like to use beautiful and magical composer?
   $memcache     = 0 # Would you like to install and set up Memcache?
 
-  # Rails
+  # Ruby/RoR
   $install_ruby = 0 # Should we install ruby?
                     # WARNING! If yes, it will ignore Apache2/Nginx and PHP installation!
   $ruby_version = '2.0.0' # What version of ruby should be installed?
+  $rails        = 1 # Should we install Ruby on Rails?
+  $rails_ver    = '' # What version of rails should it go with? Leave empty for default.
 
   # Sendmail/mailcatcher
   $mailcatcher  = 0 # Would you like to install MailCatcher?

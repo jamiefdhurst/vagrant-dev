@@ -33,4 +33,10 @@ class nginx {
     target  => "/etc/nginx/sites-available/vagrant",
     notify  => Service["nginx"],
   }
+
+  if $rails == 1 {
+    exec { "install passenger module":
+      command => "${sudo} 'gem install passenger'",
+    }
+  }
 }
