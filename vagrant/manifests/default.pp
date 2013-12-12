@@ -13,7 +13,6 @@ include $service
 
 if $rails == 1 {
   include rails
-  include passenger
 } else {
   include php
 

@@ -7,7 +7,5 @@ class rails {
 
   exec { "install rails":
     command => $rails_cmd,
-    creates => "${home}/.rvm/bin/bundle",
-    require => Exec['install ruby'],
   }
 }
