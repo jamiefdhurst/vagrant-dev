@@ -36,3 +36,7 @@ if $mailcatcher == 1 {
 if $memcache == 1 {
   include memcache
 }
+
+if $nodejs == 1 {
+  include nodejs
+}
