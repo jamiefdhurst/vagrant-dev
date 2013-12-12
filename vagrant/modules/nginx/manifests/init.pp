@@ -1,35 +1,26 @@
 class nginx {
 
   if $rails == 1 {
-    exec { "install passenger":
-      command => "${sudo} 'gem install passenger'",
-      require => Package["build-essential"],
+    package { 'passenger':
+      ensure   => 'installed',
+      provider => 'gem',
     }
+  }
 
-    exec { "install nginx":
-      command => "${sudo} 'rvmsudo passenger-install-nginx-module'",
-      require => Exec["install passenger"],
-    }
-
-    $require = Exec["install nginx"]
-  } else {
-    package { "nginx":
-      ensure => present,
-      require => Package["build-essential"],
-    }
-
-    $require = Package["nginx"]
+  package { "nginx":
+    ensure => present,
+    require => Package["build-essential"],
   }
 
   service { "nginx":
     ensure => running,
-    require => $require,
+    require => Package["nginx"],
   }
 
   file { "nginx-conf":
     path    => "/etc/nginx/nginx.conf",
     ensure  => file,
-    require => $require,
+    require => Package["nginx"],
     content  => template("nginx/nginx.erb"),
     notify  => Service["nginx"],
   }
@@ -37,7 +28,7 @@ class nginx {
   file { "default-nginx":
     path    => "/etc/nginx/sites-available/vagrant",
     ensure  => file,
-    require => $require,
+    require => Package["nginx"],
     content  => template("nginx/nginx-site.erb"),
     notify  => Service["nginx"],
   }
@@ -45,7 +36,7 @@ class nginx {
   file { "vagrant":
     path    => "/etc/nginx/sites-enabled/vagrant",
     ensure  => link,
-    require => $require,
+    require => Package["nginx"],
     target  => "/etc/nginx/sites-available/vagrant",
     notify  => Service["nginx"],
   }

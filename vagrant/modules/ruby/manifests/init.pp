@@ -17,8 +17,9 @@ class ruby {
   }
 
   # Make sure all bundles are installed.
-  exec { "${sudo} 'gem install bundler --no-rdoc --no-ri'":
-    creates => "${home}/.rvm/bin/bundle",
+  package { 'bundler':
+    ensure   => 'installed',
+    provider => 'gem',
     require => Exec['install ruby'],
   }
 }

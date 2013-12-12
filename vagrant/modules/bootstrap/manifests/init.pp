@@ -1,5 +1,5 @@
 class bootstrap { 
-  $packages = ["build-essential", "curl", "git"]
+  $packages = ["build-essential", "curl", "libcurl4-openssl-dev", "git"]
   
   package { $packages:
       ensure => present,

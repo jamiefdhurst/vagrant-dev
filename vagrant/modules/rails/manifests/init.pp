@@ -7,5 +7,12 @@ class rails {
 
   exec { "install rails":
     command => $rails_cmd,
+    require => Package['bundler'],
   }
+#  package { 'rails':
+#    ensure   => 'installed',
+#    provider => 'gem',
+#    require => Package['bundler'],
+#    version => $rails_ver,
+#  }
 }
