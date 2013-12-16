@@ -5,7 +5,7 @@ class rails {
     $rails_cmd = "${sudo} 'gem install rails --no-rdoc --no-ri'"
   }
 
-  exec { "install rails":
+  exec { "rails":
     command => $rails_cmd,
     require => Package['bundler'],
   }
@@ -15,4 +15,10 @@ class rails {
 #    require => Package['bundler'],
 #    version => $rails_ver,
 #  }
+
+  exec { "set up project":
+    command => "rails new /vagrant/public/",
+    require => Exec['rails'],
+    creates => "/vagrant/public/app/"
+  }
 }

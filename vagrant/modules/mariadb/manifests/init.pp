@@ -19,7 +19,7 @@ class mariadb {
   package { $packages:
     ensure => latest,
     require => [
-      Package["php5"],
+      Package[$service],
       Exec["add-key mariadb"]
     ],
   }
