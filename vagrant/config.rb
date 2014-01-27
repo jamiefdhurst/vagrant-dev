@@ -11,7 +11,7 @@ module VConfig
   $index        = 'index.php' # What file should be read.
   $server_admin = 'webmaster@localhost' # E-mail address for the admin. Fake will do...
   $logs_dir     = '/vagrant/logs' # Server side path to logs.
-  $root_dir     = '/vagrant/public' # Local side path to the project content.
+  $root_dir     = '/vagrant/web' # Local side path to the project content.
 
   # MySQL
   $database     = 'mysql' # Select database software, one of mariadb/mysql. Leave empty to disable.
