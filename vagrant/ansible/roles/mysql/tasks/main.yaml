@@ -1,0 +1,51 @@
+# Install MySQL as Database.
+- name: MySQL | Install MySQL packages
+  apt: pkg={{ item }} state=present update_cache=yes
+  with_items:
+    - mysql-server
+    - mysql-client
+
+# Let's run our MySQL server.
+- name: MySQL | Ensure MySQL Server is running
+  service:
+    name: mysql
+    state: started
+
+# Let's edit the MySQL config file, and comment one line.
+- name: MySQL | Replace MySQL config file.
+  action: copy src=../files/my.cnf dest=/etc/mysql/my.cnf
+
+# Let's check if we're able to log into the sql using our password.
+- name: MySQL | Check if we're ok to log in
+  command: mysqladmin -uroot -p{{ db_password }} status
+  register: login_attempt
+  ignore_errors: True
+
+# If not, than change it.
+- name: MySQL | Change the password for the root user
+  command: mysqladmin -uroot password {{ db_password }}
+  when: login_attempt|failed
+  register: change_password
+
+# We need to be able to login to the mysql server
+- name: MySQL | Allow root login
+  command: echo "create user 'root'@'%' identified by '{{ db_password }}';" | mysql -u root -p{{ db_password }}; echo '1' > /root/mysql-1 creates=/root/mysql-1
+  when: change_password|success
+  register: allow_user
+
+# Grant privileges to the user.
+- name: MySQL | Grand Privileges
+  command: echo "grant all privileges on *.* to 'root'@'%' with grant option;" | mysql -u root -p{{ db_password }}; echo '1' > /root/mysql-2 creates=/root/mysql-2
+  when: not allow_user|skipped
+  register: grant_priv
+
+# Flush privileges for the better.
+- name: MySQL | Flush Privileges
+  command: echo "flush privileges;" | mysql -u root -p{{ db_password }}; echo '1' > /root/mysql-3 creates=/root/mysql-3
+  when: not grant_priv|skipped
+  register: flush_priv
+
+# Restart MySQL server if previous actions were performed.
+- name: MySQL | Restart MySQL server
+  service: name=mysql state=restarted
+  when: not flush_priv|skipped

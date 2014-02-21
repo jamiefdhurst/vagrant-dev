@@ -1,0 +1,21 @@
+# Update the repo, yaaay!
+- name: Bootstrap | Update repository
+  action: command /usr/bin/apt-get update
+
+# Some of our actions will require build essentials.
+- name: Bootstrap | Build Essentials and Other Packages
+  action: apt pkg={{ item }} state=installed
+  with_items:
+      - build-essential
+      - python-software-properties
+      - python
+      - g++
+      - make
+
+# Let's install curl as we will need it in some point.
+- name: Bootstrap | cURL
+  action: apt pkg=curl state=installed
+
+# GIT, because it's so amazing.
+- name: Bootstrap | Git
+  action: apt pkg=git state=installed

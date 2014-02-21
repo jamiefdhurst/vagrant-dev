@@ -1,0 +1,26 @@
+# Let's install NGINX as service.
+- name: Nginx | Install Nginx
+  action: apt pkg=nginx state=installed
+
+# Change the user and group for the sake of power!
+#- name: Nginx | Set vagrant as the main user.
+#  lineinfile: dest=/etc/php5/fpm/pool.d/www.conf regexp='^#www-data' line='vagrant' state=present
+
+# Add our site config
+- name: Nginx | Create new site enabled watcher
+  template:
+    src=../templates/vagrant.j2
+    dest=/etc/nginx/sites-enabled/vagrant
+
+# Create link to the file
+- name: Nginx | Create link to site available
+  file:
+    src=/etc/nginx/sites-enabled/vagrant
+    dest=/etc/nginx/sites-available/vagrant
+    state=link
+
+# Let's run our NGINX!
+- name: Nginx | Ensure Nginx is running
+  service:
+    name: nginx
+    state: started
