@@ -40,6 +40,10 @@ module VConfig
       # Sendmail
       sendmail:         false, # Do you wish to include sendmail to your box?
 
+      # Compass
+      compass:          false, # Are you so cool to use compass with sass?
+      compasc_project:  '', # Direct us to the main directory of your compass project, so we can put the watch on!
+
   }
 
 end

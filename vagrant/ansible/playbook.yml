@@ -11,5 +11,6 @@
     - { role: composer, when: (composer) }
     - { role: sendmail, when: (sendmail) }
     - { role: nodejs, when: (nodejs) }
+    - { role: compass, when: (compass) }
 #    - { role: ruby, when: (ruby) }
 #    - { role: rails, when: (rails) }
