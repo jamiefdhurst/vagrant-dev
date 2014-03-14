@@ -18,4 +18,4 @@
   service:
     name: "{{ service }}"
     state: restarted
-  when: result|success
+  when: result|success and not result|skipped

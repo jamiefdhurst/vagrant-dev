@@ -64,9 +64,13 @@
   service:
     name: mysql
     state: restarted
+  when: not flush_priv|skipped
+  register: mysql_restart
 
 # Restart MySQL server if previous actions were performed.
 - name: MySQL | Restart PHP
   service:
     name: php5-fpm
     state: restarted
+  when: not mysql_restart|skipped
+  register: php_restart
