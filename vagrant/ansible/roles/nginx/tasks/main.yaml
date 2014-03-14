@@ -4,31 +4,23 @@
     pkg: nginx
     state: installed
 
-# Change the user and group for the sake of power!
-#- name: Nginx | Set vagrant as the main user.
-#  lineinfile: dest=/etc/php5/fpm/pool.d/www.conf regexp='^#www-data' line='vagrant' state=present
-
 # Remove default file.
-- name: Nginx | Remove Default template file from sites enabled.
+- name: Nginx | Remove Default site config
   file:
     path: "/etc/nginx/sites-enabled/default"
     state: absent
-- name: Nginx | Remove Default template file from sites available.
-  file:
+- file:
     path: "/etc/nginx/sites-available/default"
     state: absent
 
 # Add our site config
-- name: Nginx | Create new site enabled watcher
+- name: Nginx | Add new site config
   template:
     src: "../templates/vagrant.j2"
-    dest: "/etc/nginx/sites-enabled/vagrant"
-
-# Create link to the file
-- name: Nginx | Create link to site available
-  file:
-    src: "/etc/nginx/sites-enabled/vagrant"
     dest: "/etc/nginx/sites-available/vagrant"
+- file:
+    src: "/etc/nginx/sites-available/vagrant"
+    dest: "/etc/nginx/sites-enabled/vagrant"
     state: link
 
 # Let's run our NGINX!
