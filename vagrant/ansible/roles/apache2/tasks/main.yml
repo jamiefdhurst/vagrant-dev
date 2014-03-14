@@ -18,13 +18,6 @@
     src: "../templates/vagrant.j2"
     dest: "/etc/apache2/sites-available/default"
 
-# Create link to the file
-#- name: Apache2 | Create link to rewrite.load
-#  file:
-#    src: "/etc/apache2/mods-enabled/rewrite.load"
-#    dest: "/etc/apache2/mods-available/rewrite.load"
-#    state: link
-
 # Let's run our Apache2!
 - name: Apache2 | Ensure Apache2 is running
   service:

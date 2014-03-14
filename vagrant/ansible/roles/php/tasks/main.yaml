@@ -14,19 +14,24 @@
   register: result
 
 # Let's make it easier for our selves.
-- name: PHP | Let's make the future easy by changing php user and group to vagrant
+- name: PHP | Change php user to vagrant
   lineinfile: dest=/etc/php5/fpm/pool.d/www.conf
     regexp='^(?:#[^\n]+\n)*user = www-data[^<]+?'
     line='user = vagrant'
     backup=yes
-- lineinfile: dest=/etc/php5/fpm/pool.d/www.conf
-      regexp='^(?:#[^\n]+\n)*group = www-data[^<]+?'
-      line='group = vagrant'
-      backup=yes
+    state=present
+    backrefs=yes
+- name: PHP | ... and the group
+  lineinfile: dest=/etc/php5/fpm/pool.d/www.conf
+    regexp='^(?:#[^\n]+\n)*group = www-data[^<]+?'
+    line='group = vagrant'
+    backup=yes
+    state=present
+    backrefs=yes
 
 # Restart the service.
 - name: PHP | Restart Service after PHP installation.
   service:
     name: "{{ service }}"
     state: restarted
-  when: result|success and not result|skipped
+  when: result|changed
