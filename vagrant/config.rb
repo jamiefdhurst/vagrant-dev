@@ -17,7 +17,7 @@ module VConfig
       root_dir:         '/vagrant/web', # Local side path to the project content.
 
       # MySQL
-      database:         '', # Select database software, one of mariadb/mysql. Leave empty to disable.
+      database:         'mysql', # Select database software, one of mariadb/mysql. Write "none" to disable installation.
       db_password:      'root', # Which password should be set up for the root user of database?
 
       # NodeJS
