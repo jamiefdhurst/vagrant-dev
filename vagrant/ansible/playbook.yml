@@ -9,7 +9,6 @@
     - { role: "{{ database }}", when: (database != '') }
     - { role: memcache, when: (memcache) }
     - { role: composer, when: (composer) }
-    - { role: mailcatcher, when: (mailcatcher) }
     - { role: sendmail, when: (sendmail) }
     - { role: nodejs, when: (nodejs) }
 #    - { role: ruby, when: (ruby) }

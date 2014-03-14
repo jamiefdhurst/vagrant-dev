@@ -37,8 +37,7 @@ module VConfig
       rails:            false, # Should we install Ruby on Rails?
       rails_ver:        '', # What version of rails should it go with? Leave empty for default.
 
-      # Sendmail/mailcatcher
-      mailcatcher:      true, # Would you like to install MailCatcher?
+      # Sendmail
       sendmail:         false, # Do you wish to include sendmail to your box?
 
   }
