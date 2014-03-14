@@ -1,3 +1,6 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
 require './vagrant/config'
 include VConfig
 
@@ -5,7 +8,7 @@ Vagrant.configure('2') do |config|
 
   # Configure virtualbox to allow $ram-MB memory and symlinks
   config.vm.provider :virtualbox do |vb|
-    vb.customize ['modifyvm', :id, '--memory', $ram]
+    vb.customize ['modifyvm', :id, '--memory', $config[:ram]]
     vb.customize ['setextradata', :id, 'VBoxInternal2/SharedFoldersEnableSymlinksCreate/v-root', '1']
   end
 
@@ -14,28 +17,36 @@ Vagrant.configure('2') do |config|
   config.vm.box_url = 'http://files.vagrantup.com/precise32.box'
 
   # Set up network for HTTP/HTTPS and MySQL
-  config.vm.network :forwarded_port, guest: 80, host: $port
+  config.vm.network :forwarded_port, guest: 80, host: $config[:port]
   config.vm.network :forwarded_port, guest: 443, host: 8443
 
-  if $database != '' # If database is set.
+  if $config[:database] != '' # If database is set.
     config.vm.network :forwarded_port, guest: 3306, host: 3306
   end
-  if $mailcatcher == 1 # If MailCatcher is requested.
+  if $config[:mailcatcher] # If MailCatcher is requested.
     config.vm.network :forwarded_port, guest: 1080, host: 1080
   end
+<<<<<<< HEAD
   if $memcache == 1 # If Memcache will be installed.
     config.vm.network :forwarded_port, guest: 11211, host: 11211
   end
+=======
+  if $config[:memcache] # If Memcache will be installed.
+    config.vm.network :forwarded_port, guest: 11211, host: 11211
+  end
+
+  config.vm.network :private_network, ip: '192.168.111.222'
+>>>>>>> ansible
 
   config.vm.synced_folder '.', '/vagrant', owner: 'www-data', group: 'www-data', :mount_options => ['dmode=777,fmode=777']
 
-  # Load up all the modules
-  config.vm.provision :puppet do |puppet|
-    puppet.manifests_path = 'vagrant/manifests'
-    puppet.manifest_file = 'default.pp'
-    puppet.module_path = 'vagrant/modules'
+  # Load up all the ansible
+  config.vm.provision :ansible do |ansible|
+    ansible.playbook = 'vagrant/ansible/playbook.yml'
+    ansible.inventory_path = 'vagrant/ansible/me'
 
     # Pass the variables through!
+<<<<<<< HEAD
     puppet.facter = {
         :box_link => $box_link,
         :box_ip => $box_ip,
@@ -60,5 +71,8 @@ Vagrant.configure('2') do |config|
         :service => $service,
         :sudo => $sudo,
     }
+=======
+    ansible.extra_vars = $config
+>>>>>>> ansible
   end
 end

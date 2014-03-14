@@ -1,0 +1,32 @@
+# Some of our actions will require build essentials.
+- name: PHP | PHP core and required modules
+  apt:
+    pkg: "{{ item }}"
+    state: installed
+  tags: php
+  with_items:
+    - php5
+    - php5-curl
+    - php5-cli
+    - php5-dev
+    - php5-fpm
+    - php5-mcrypt
+  register: result
+
+# Let's make it easier for our selves.
+- name: PHP | Let's make the future easy by changing php user and group to vagrant
+  lineinfile: dest=/etc/php5/fpm/pool.d/www.conf
+    regexp='^(?:#[^\n]+\n)*user = www-data[^<]+?'
+    line='user = vagrant'
+    backup=yes
+- lineinfile: dest=/etc/php5/fpm/pool.d/www.conf
+      regexp='^(?:#[^\n]+\n)*group = www-data[^<]+?'
+      line='group = vagrant'
+      backup=yes
+
+# Restart the service.
+- name: PHP | Restart Service after PHP installation.
+  service:
+    name: "{{ service }}"
+    state: restarted
+  when: result|success and not result|skipped

@@ -1,0 +1,25 @@
+# Let's install Mailcatcher dependencies!
+- name: Mailcatcher | Install Mailcatcher dependencies.
+  apt:
+    pkg: libsqlite3-dev
+    state: installed
+
+# Install Mailcatcher it self.
+- name: Malcatcher | Install Mailcatcher itself.
+  command: gem install mailcatcher creates=/usr/local/bin/catchmail
+
+# Change PHP Config.
+- name: Mailcatcher | Let's enable Mailcatcher in php.
+  lineinfile: dest=/etc/php5/fpm/php.ini
+    regexp='^(?:#[^\n]+\n)*;sendmail_path =[^<]+?'
+    line='sendmail_path = /usr/local/bin/catchmail'
+    backup=yes
+  when: (php)
+  register: result
+
+# Restart the service.
+- name: Mailcatcher | Restart PHP after completion installation.
+  service:
+    name: php5-fpm
+    state: restarted
+  when: result|success and not result|skipped

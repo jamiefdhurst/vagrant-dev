@@ -1,0 +1,30 @@
+# Let's install NGINX as service.
+- name: Nginx | Install Nginx
+  apt:
+    pkg: nginx
+    state: installed
+
+# Remove default file.
+- name: Nginx | Remove Default site config
+  file:
+    path: "/etc/nginx/sites-enabled/default"
+    state: absent
+- file:
+    path: "/etc/nginx/sites-available/default"
+    state: absent
+
+# Add our site config
+- name: Nginx | Add new site config
+  template:
+    src: "../templates/vagrant.j2"
+    dest: "/etc/nginx/sites-available/vagrant"
+- file:
+    src: "/etc/nginx/sites-available/vagrant"
+    dest: "/etc/nginx/sites-enabled/vagrant"
+    state: link
+
+# Let's run our NGINX!
+- name: Nginx | Ensure Nginx is running
+  service:
+    name: nginx
+    state: started
