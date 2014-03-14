@@ -1,0 +1,13 @@
+# Let's install Mailcatcher dependencies!
+- name: Mailcatcher | Install Mailcatcher dependencies.
+  apt:
+      pkg: "{{ item }}"
+      state: installed
+  with_items:
+    - libsqlite3-dev
+
+# Install Mailcatcher it self.
+- name: Malcatcher | Install Mailcatcher itself.
+  gem:
+    pkg: mailcatchel
+    state: installed

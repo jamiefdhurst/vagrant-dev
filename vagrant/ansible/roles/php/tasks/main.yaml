@@ -1,7 +1,8 @@
 # Some of our actions will require build essentials.
 - name: PHP | PHP core and required modules
-  action: apt pkg={{ item }} state=installed
-  notify: restart {{ service }}
+  apt:
+    pkg: "{{ item }}"
+    state: installed
   tags: php
   with_items:
     - php5
@@ -10,4 +11,11 @@
     - php5-dev
     - php5-fpm
     - php5-mcrypt
-    - php5-mysql
+  register: result
+
+# Restart the service.
+- name: PHP | Restart Service after PHP installation.
+  service:
+    name: "{{ service }}"
+    state: restarted
+  when: result|success

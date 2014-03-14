@@ -1,19 +1,33 @@
 # Install MySQL as Database.
 - name: MySQL | Install MySQL packages
-  apt: pkg={{ item }} state=present update_cache=yes
+  apt:
+    pkg: "{{ item }}"
+    state: present
   with_items:
     - mysql-server
     - mysql-client
+
+# Install MySQL as php extension.
+- name: MySQL | Install MySQL - PHP library.
+  apt:
+    pkg: "{{ item }}"
+    state: present
+  with_items:
+    - php5-mysql
+  when: php
 
 # Let's run our MySQL server.
 - name: MySQL | Ensure MySQL Server is running
   service:
     name: mysql
     state: started
+    enabled: yes
 
-# Let's edit the MySQL config file, and comment one line.
+# Let's replace the MySQL config file.
 - name: MySQL | Replace MySQL config file.
-  action: copy src=../files/my.cnf dest=/etc/mysql/my.cnf
+  template:
+    src: "../templates/my.j2"
+    dest: "/etc/mysql/my.cnf"
 
 # Let's check if we're able to log into the sql using our password.
 - name: MySQL | Check if we're ok to log in
@@ -21,7 +35,7 @@
   register: login_attempt
   ignore_errors: True
 
-# If not, than change it.
+## If not, than change it.
 - name: MySQL | Change the password for the root user
   command: mysqladmin -uroot password {{ db_password }}
   when: login_attempt|failed
@@ -29,23 +43,30 @@
 
 # We need to be able to login to the mysql server
 - name: MySQL | Allow root login
-  command: echo "create user 'root'@'%' identified by '{{ db_password }}';" | mysql -u root -p{{ db_password }}; echo '1' > /root/mysql-1 creates=/root/mysql-1
-  when: change_password|success
+  shell: echo "create user 'root'@'%' identified by '{{ db_password }}';" | mysql -u root -p{{ db_password }};
+  when: not change_password|skipped and change_password|success
   register: allow_user
 
 # Grant privileges to the user.
 - name: MySQL | Grand Privileges
-  command: echo "grant all privileges on *.* to 'root'@'%' with grant option;" | mysql -u root -p{{ db_password }}; echo '1' > /root/mysql-2 creates=/root/mysql-2
+  shell: echo "grant all privileges on *.* to 'root'@'%' with grant option;" | mysql -u root -p{{ db_password }};
   when: not allow_user|skipped
   register: grant_priv
 
 # Flush privileges for the better.
 - name: MySQL | Flush Privileges
-  command: echo "flush privileges;" | mysql -u root -p{{ db_password }}; echo '1' > /root/mysql-3 creates=/root/mysql-3
+  shell: echo "flush privileges;" | mysql -u root -p{{ db_password }};
   when: not grant_priv|skipped
   register: flush_priv
 
 # Restart MySQL server if previous actions were performed.
 - name: MySQL | Restart MySQL server
-  service: name=mysql state=restarted
-  when: not flush_priv|skipped
+  service:
+    name: mysql
+    state: restarted
+
+# Restart MySQL server if previous actions were performed.
+- name: MySQL | Restart PHP
+  service:
+    name: php5-fpm
+    state: restarted
