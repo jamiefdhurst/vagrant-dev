@@ -27,7 +27,7 @@
     state: installed
 
 # Install rubygems operator.
-- name: Bootstrap | rubygems
+- name: Bootstrap | RubyGems
   apt:
     pkg: rubygems
     state: installed
