@@ -26,17 +26,11 @@ Vagrant.configure('2') do |config|
   if $config[:mailcatcher] # If MailCatcher is requested.
     config.vm.network :forwarded_port, guest: 1080, host: 1080
   end
-<<<<<<< HEAD
-  if $memcache == 1 # If Memcache will be installed.
-    config.vm.network :forwarded_port, guest: 11211, host: 11211
-  end
-=======
   if $config[:memcache] # If Memcache will be installed.
     config.vm.network :forwarded_port, guest: 11211, host: 11211
   end
 
   config.vm.network :private_network, ip: '192.168.111.222'
->>>>>>> ansible
 
   config.vm.synced_folder '.', '/vagrant', owner: 'www-data', group: 'www-data', :mount_options => ['dmode=777,fmode=777']
 
@@ -46,33 +40,6 @@ Vagrant.configure('2') do |config|
     ansible.inventory_path = 'vagrant/ansible/me'
 
     # Pass the variables through!
-<<<<<<< HEAD
-    puppet.facter = {
-        :box_link => $box_link,
-        :box_ip => $box_ip,
-        :composer => $composer,
-        :database => $database,
-        :db_password => $db_password,
-        :home => $home,
-        :index => $index,
-        :install_ruby => $install_ruby,
-        :logs_dir => $logs_dir,
-        :mailcatcher => $mailcatcher,
-        :memcache => $memcache,
-        :nodejs => $nodejs,
-        :newest_php => $newest_php,
-        :rails => $rails,
-        :rails_ver => $rails_ver,
-        :ram => $ram,
-        :ruby_version => $ruby_version,
-        :root_dir => $root_dir,
-        :sendmail => $sendmail,
-        :server_admin => $server_admin,
-        :service => $service,
-        :sudo => $sudo,
-    }
-=======
     ansible.extra_vars = $config
->>>>>>> ansible
   end
 end
