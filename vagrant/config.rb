@@ -27,6 +27,7 @@ module VConfig
       php:              true, # Should the PHP be installed?
       newest_php:       false, # Would you like to install newest PHP possible (5.5) or stick with official version from repos?
                            # WARNING! Currently only supports nginx, NOT apache2!
+      laravel:          true, # Would you like to install laravel globally?
       composer:         true, # Would you like to use beautiful and magical composer?
       memcache:         false, # Would you like to install and set up Memcache?
 
