@@ -17,7 +17,7 @@ module VConfig
       root_dir:         '/vagrant/web', # Local side path to the project content.
 
       # MySQL
-      database:         'mysql', # Select database software, one of mariadb/mysql. Leave empty to disable.
+      database:         '', # Select database software, one of mariadb/mysql. Leave empty to disable.
       db_password:      'root', # Which password should be set up for the root user of database?
 
       # NodeJS
@@ -27,7 +27,7 @@ module VConfig
       php:              true, # Should the PHP be installed?
       newest_php:       false, # Would you like to install newest PHP possible (5.5) or stick with official version from repos?
                            # WARNING! Currently only supports nginx, NOT apache2!
-      laravel:          true, # Would you like to install laravel globally?
+      laravel:          false, # Would you like to install laravel globally?
       composer:         true, # Would you like to use beautiful and magical composer?
       memcache:         false, # Would you like to install and set up Memcache?
 
