@@ -1,0 +1,32 @@
+# Let's install Apache2 as service.
+- name: Apache2 | Install Apache2
+  apt:
+    pkg: apache2
+    state: installed
+  register: result
+
+# Let's install Apache2 as service.
+- name: Apache2 | Install PHP hook for Apache2
+  apt:
+    pkg: libapache2-mod-php5
+    state: installed
+  when: result|success and not result|skipped and (php)
+
+# Add our site config
+- name: Apache2 | Create new site available watcher
+  template:
+    src: "../templates/vagrant.j2"
+    dest: "/etc/apache2/sites-available/default"
+
+# Create link to the file
+#- name: Apache2 | Create link to rewrite.load
+#  file:
+#    src: "/etc/apache2/mods-enabled/rewrite.load"
+#    dest: "/etc/apache2/mods-available/rewrite.load"
+#    state: link
+
+# Let's run our Apache2!
+- name: Apache2 | Ensure Apache2 is running
+  service:
+    name: apache2
+    state: started
