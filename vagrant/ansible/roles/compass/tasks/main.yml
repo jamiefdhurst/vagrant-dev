@@ -12,12 +12,12 @@
 
 # Let's see if the project is set.
 - name: Compass | Check the project path
-  command: cat "{{ compasc_project }}"/config.rb
+  command: cat "{{ compass_project }}"/config.rb
   register: project
   ignore_errors: True
 
 # Run the watch.
 - name: Compass | Set the watch worker.
-  command: chdir={{ compasc_project }} compass watch
+  command: chdir={{ compass_project }} compass watch
   when: project|success
   ignore_errors: True

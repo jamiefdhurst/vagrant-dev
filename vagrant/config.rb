@@ -44,7 +44,7 @@ module VConfig
 
       # Compass
       compass:          false, # Are you so cool to use compass with sass?
-      compasc_project:  '', # Direct us to the main directory of your compass project, so we can put the watch on!
+      compass_project:  '', # Direct us to the main directory of your compass project, so we can put the watch on!
 
   }
 
