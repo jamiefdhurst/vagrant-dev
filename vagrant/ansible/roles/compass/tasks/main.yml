@@ -1,0 +1,23 @@
+# Install SASS.
+- name: Compass | Install SASS
+  command: gem install sass creates=/usr/local/bin/sass
+
+# Install Susy.
+- name: Compass | Install Susy
+  command: gem install susy
+
+# Install Compass it self!
+- name: Compass | Install Compass
+  command: gem install compass creates=/usr/local/bin/compass
+
+# Let's see if the project is set.
+- name: Compass | Check the project path
+  command: cat "{{ compass_project }}"/config.rb
+  register: project
+  ignore_errors: True
+
+# Run the watch.
+- name: Compass | Set the watch worker.
+  command: chdir={{ compass_project }} compass watch
+  when: project|success
+  ignore_errors: True

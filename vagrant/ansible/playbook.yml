@@ -1,0 +1,18 @@
+---
+- hosts: vagrant
+  sudo: True
+  roles:
+    - bootstrap
+    - repos
+    - { role: "{{ service }}" }
+    - { role: php, when: (php) }
+    - { role: "{{ database }}", when: (database != '') }
+    - { role: laravel, when: (laravel) }
+    - { role: memcache, when: (memcache) }
+    - { role: composer, when: (composer) }
+    - { role: sendmail, when: (sendmail) }
+    - { role: mailcatcher, when: (mailcatcher) }
+    - { role: nodejs, when: (nodejs) }
+    - { role: compass, when: (compass) }
+#    - { role: ruby, when: (ruby) }
+#    - { role: rails, when: (rails) }

@@ -1,0 +1,7 @@
+# Install NodeJS to our server.
+- name: NodeJS | Install NodeJS + NPM packages
+  apt:
+    pkg: "{{ item }}"
+    state: present
+  with_items:
+    - nodejs

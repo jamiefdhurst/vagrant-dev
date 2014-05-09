@@ -1,0 +1,20 @@
+server {
+    listen 80;
+    server_name {{ box_link }} {{ box_ip }};
+    access_log {{ logs_dir }}/access.log;
+    error_log {{ logs_dir }}/error.log;
+
+    location / {
+        root {{ root_dir }};
+        index index.html index.htm {{ index }};
+        try_files $uri $uri/ /{{ index }}?$args;
+        location ~ \.php {
+                fastcgi_pass {{ box_ip }}:9000;
+                fastcgi_index {{ index }};
+                include /etc/nginx/fastcgi_params;
+                fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+
+                fastcgi_read_timeout 60;
+        }
+    }
+}
