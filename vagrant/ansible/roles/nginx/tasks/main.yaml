@@ -23,6 +23,15 @@
     dest: "/etc/nginx/sites-enabled/vagrant"
     state: link
 
+# Let's set the NGINX and PHP connection.
+- name: Nginx | Let us remove Nginx caching.
+  lineinfile: dest=/etc/nginx/nginx.conf
+    regexp='sendfile on;'
+    line='    sendfile off;\n    expires off;\n    if_modified_since off;'
+    backup=yes
+    state=present
+    backrefs=yes
+
 # Let's run our NGINX!
 - name: Nginx | Ensure Nginx is running
   service:
