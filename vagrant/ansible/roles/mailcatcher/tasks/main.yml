@@ -5,7 +5,7 @@
     state: installed
 
 # Install Mailcatcher it self.
-- name: Malcatcher | Install Mailcatcher itself.
+- name: Mailcatcher | Install Mailcatcher itself.
   command: gem install mailcatcher creates=/usr/local/bin/catchmail
   ignore_errors: true
 
