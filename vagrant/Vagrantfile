@@ -38,6 +38,7 @@ Vagrant.configure('2') do |config|
   config.vm.provision :ansible do |ansible|
     ansible.playbook = 'vagrant/ansible/playbook.yml'
     ansible.inventory_path = 'vagrant/ansible/me'
+    ansible.limit = 'all'
 
     # Pass the variables through!
     ansible.extra_vars = $config
