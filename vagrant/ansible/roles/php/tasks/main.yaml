@@ -13,6 +13,7 @@
     - php5-gd
     - php5-json
     - php5-mcrypt
+    - php5-gd
   register: result
 
 # Let's make it easier for our selves.
