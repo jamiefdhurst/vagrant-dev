@@ -10,6 +10,8 @@
     - php5-cli
     - php5-dev
     - php5-fpm
+    - php5-gd
+    - php5-json
     - php5-mcrypt
     - php5-gd
   register: result
