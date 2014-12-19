@@ -25,7 +25,7 @@ module VConfig
 
       # PHP
       php:              true, # Should the PHP be installed?
-      newest_php:       false, # Would you like to install newest PHP possible (5.5) or stick with official version from repos?
+      newest_php:       false, # Would you like to install newest PHP possible (5.6) or stick with official version from repositories?
                            # WARNING! Currently only supports nginx, NOT apache2!
       laravel:          false, # Would you like to install laravel globally?
       composer:         true, # Would you like to use beautiful and magical composer?
@@ -36,7 +36,7 @@ module VConfig
 
       # Sendmail/mailcatcher
       mailcatcher:      true, # Would you like to install MailCatcher?
-      sendmail:         false, # Do you wish to include sendmail to your box?
+      sendmail:         true, # Do you wish to include sendmail to your box?
 
       # Compass
       compass:          false, # Are you so cool to use compass with sass?
