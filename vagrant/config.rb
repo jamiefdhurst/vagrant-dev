@@ -21,7 +21,7 @@ module VConfig
       db_password:      'root', # Which password should be set up for the root user of database?
 
       # NodeJS
-      nodejs:           false, # Would you like to install NodeJS in your environment?
+      nodejs:           true, # Would you like to install NodeJS in your environment?
 
       # PHP
       php:              true, # Should the PHP be installed?
