@@ -1,0 +1,3 @@
+# Install grunt in our project.
+- name: Grunt | Install grunt
+  npm: name=grunt-cli global=yes state=latest

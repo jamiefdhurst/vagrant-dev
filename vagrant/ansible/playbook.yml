@@ -15,4 +15,7 @@
     - { role: compass, when: (compass) }
     - { role: mailcatcher, when: (mailcatcher) }
     - { role: nodejs, when: (nodejs) }
+    - { role: grunt, when: (grunt) }
+    - { role: bower, when: (bower) }
+    - { role: gulp, when: (gulp) }
 #    - { role: rails, when: (rails) }

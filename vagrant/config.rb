@@ -34,6 +34,12 @@ module VConfig
       # Ruby
       ruby:             false, # Should we install NEWEST version of ruby? - It slows the process.
 
+      # Grunt, Gulp and Bower
+      # ALL REQUIRE: nodejs to be true!
+      grunt:            true, # Should we install grunt for you?
+      bower:            true, # How about bower?
+      gulp:             false, # Perhaps you'd be interested in gulp?
+
       # Sendmail/mailcatcher
       mailcatcher:      true, # Would you like to install MailCatcher?
       sendmail:         true, # Do you wish to include sendmail to your box?
