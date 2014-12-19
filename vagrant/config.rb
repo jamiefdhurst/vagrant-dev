@@ -31,12 +31,8 @@ module VConfig
       composer:         true, # Would you like to use beautiful and magical composer?
       memcache:         false, # Would you like to install and set up Memcache?
 
-      # Ruby/RoR
-      install_ruby:     false, # Should we install ruby?
-                           # WARNING! If yes, it will ignore Apache2/Nginx and PHP installation!
-      ruby_version:     '2.0.0', # What version of ruby should be installed?
-      rails:            false, # Should we install Ruby on Rails?
-      rails_ver:        '', # What version of rails should it go with? Leave empty for default.
+      # Ruby
+      ruby:             false, # Should we install NEWEST version of ruby? - It slows the process.
 
       # Sendmail/mailcatcher
       mailcatcher:      true, # Would you like to install MailCatcher?

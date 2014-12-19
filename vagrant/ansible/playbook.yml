@@ -14,5 +14,5 @@
     - { role: mailcatcher, when: (mailcatcher) }
     - { role: nodejs, when: (nodejs) }
     - { role: compass, when: (compass) }
-#    - { role: ruby, when: (ruby) }
+    - { role: ruby, when: (ruby) }
 #    - { role: rails, when: (rails) }
