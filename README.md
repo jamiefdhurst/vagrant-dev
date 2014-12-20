@@ -11,14 +11,16 @@ Puppet which was opposed to Shell scripts.
 
 This environment currently supports the following software:
 * Apache2 or Nginx acting as webserver
-* PHP 5.3 (Ubuntu LTS latest) or 5.5 (current latest)
+* PHP 5.3 (Ubuntu LTS latest) or 5.6 (current latest)
 * MySQL
 * Memcached
 * Composer
 * Laravel
 * Compass, SASS and Susy
 * NodeJS
-* Sendmail or Mailcatcher
+* Ruby (rvm latest stable version)
+* Grunt, Bower and/or Gulp
+* Sendmail and/or Mailcatcher
 * RubyGems, Git, cURL, [build-essential, python-software-properties, python, g++, make]
 
 ##Configuration
