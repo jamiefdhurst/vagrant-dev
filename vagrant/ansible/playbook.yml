@@ -11,8 +11,11 @@
     - { role: memcache, when: (memcache) }
     - { role: composer, when: (composer) }
     - { role: sendmail, when: (sendmail) }
+    - { role: ruby, when: (ruby) }
+    - { role: compass, when: (compass) }
     - { role: mailcatcher, when: (mailcatcher) }
     - { role: nodejs, when: (nodejs) }
-    - { role: compass, when: (compass) }
-#    - { role: ruby, when: (ruby) }
+    - { role: grunt, when: (grunt) }
+    - { role: bower, when: (bower) }
+    - { role: gulp, when: (gulp) }
 #    - { role: rails, when: (rails) }

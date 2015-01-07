@@ -25,3 +25,7 @@
   apt:
     pkg: git
     state: installed
+
+# Setup correct permissions for our home folder...
+- name: Bootstrap | Permissions setup
+  file: path=/home/vagrant state=directory owner=vagrant group=vagrant recurse=yes force=yes

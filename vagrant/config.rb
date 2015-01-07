@@ -21,26 +21,28 @@ module VConfig
       db_password:      'root', # Which password should be set up for the root user of database?
 
       # NodeJS
-      nodejs:           false, # Would you like to install NodeJS in your environment?
+      nodejs:           true, # Would you like to install NodeJS in your environment?
 
       # PHP
       php:              true, # Should the PHP be installed?
-      newest_php:       false, # Would you like to install newest PHP possible (5.5) or stick with official version from repos?
+      newest_php:       false, # Would you like to install newest PHP possible (5.6) or stick with official version from repositories?
                            # WARNING! Currently only supports nginx, NOT apache2!
       laravel:          false, # Would you like to install laravel globally?
       composer:         true, # Would you like to use beautiful and magical composer?
       memcache:         false, # Would you like to install and set up Memcache?
 
-      # Ruby/RoR
-      install_ruby:     false, # Should we install ruby?
-                           # WARNING! If yes, it will ignore Apache2/Nginx and PHP installation!
-      ruby_version:     '2.0.0', # What version of ruby should be installed?
-      rails:            false, # Should we install Ruby on Rails?
-      rails_ver:        '', # What version of rails should it go with? Leave empty for default.
+      # Ruby
+      ruby:             false, # Should we install NEWEST version of ruby? - It slows the process.
+
+      # Grunt, Gulp and Bower
+      # ALL REQUIRE: nodejs to be true!
+      grunt:            true, # Should we install grunt for you?
+      bower:            true, # How about bower?
+      gulp:             false, # Perhaps you'd be interested in gulp?
 
       # Sendmail/mailcatcher
       mailcatcher:      true, # Would you like to install MailCatcher?
-      sendmail:         false, # Do you wish to include sendmail to your box?
+      sendmail:         true, # Do you wish to include sendmail to your box?
 
       # Compass
       compass:          false, # Are you so cool to use compass with sass?
