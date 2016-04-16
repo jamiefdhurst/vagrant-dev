@@ -21,9 +21,9 @@ This environment currently supports the following software:
 
 ## Configuration
 
-The vagrant configuration file is located in vagrant/config.rb. This file allows
+The vagrant configuration file is located in ```vagrant/config.rb```. This file allows
 environment settings such as the web root, database root password, log directory,
 etc.
 
-All configuration files are available within vagrant/env and can be configured
+All configuration files are available within ```vagrant/env``` and can be configured
 to your individual project requirements.
