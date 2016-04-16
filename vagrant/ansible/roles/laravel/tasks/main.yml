@@ -1,9 +1,0 @@
-# Let's install Laravel globally!
-- name: Laravel | Install Laravel
-  shell:
-    wget http://laravel.com/laravel.phar | /usr/bin/php && /bin/mv -f /home/vagrant/laravel.phar /usr/local/bin/laravel
-    creates=/usr/local/bin/laravel
-
-# Make Laravel app usable.
-- name: Laravel | Set Permisions on Laravel
-  action: file path=/usr/local/bin/laravel mode=0777 owner=vagrant group=vagrant

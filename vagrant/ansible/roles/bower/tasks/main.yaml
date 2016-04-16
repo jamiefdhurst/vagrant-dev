@@ -1,3 +1,0 @@
-# Install bower in our project.
-- name: Bower | Install bower
-  npm: name=bower global=yes state=latest

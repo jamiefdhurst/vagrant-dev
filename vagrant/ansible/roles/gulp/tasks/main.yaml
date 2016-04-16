@@ -1,3 +1,0 @@
-# Install gulp in our project.
-- name: Gulp | Install gulp
-  npm: name=gulp global=yes state=latest

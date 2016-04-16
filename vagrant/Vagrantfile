@@ -4,23 +4,23 @@
 require './vagrant/config'
 include VConfig
 
+Vagrant.require_version ">= 1.7"
 Vagrant.configure('2') do |config|
 
   # Configure virtualbox to allow $ram-MB memory and symlinks
   config.vm.provider :virtualbox do |vb|
-    vb.customize ['modifyvm', :id, '--memory', $config[:ram]]
+    vb.customize ['modifyvm', :id, '--memory', $config[:box_ram]]
     vb.customize ['setextradata', :id, 'VBoxInternal2/SharedFoldersEnableSymlinksCreate/v-root', '1']
   end
 
-  # Use Ubuntu LTS 14.04 x64
-  config.vm.box = 'trusty64'
-  config.vm.box_url = 'https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box'
+  # Use Ubuntu LTS 16.04 x64
+  config.vm.box = 'ubuntu/xenial64'
 
   # Set up network for HTTP/HTTPS and MySQL
-  config.vm.network :forwarded_port, guest: 80, host: $config[:port]
-  config.vm.network :forwarded_port, guest: 443, host: 8443
+  config.vm.network :forwarded_port, guest: 80, host: $config[:web_port]
+  # config.vm.network :forwarded_port, guest: 443, host: $config[:web_ssl_port]
 
-  if $config[:database] != '' # If database is set.
+  if $config[:db_service] != '' # If database is set.
     config.vm.network :forwarded_port, guest: 3306, host: 3306
   end
   if $config[:mailcatcher] # If MailCatcher is requested.
@@ -34,13 +34,14 @@ Vagrant.configure('2') do |config|
 
   config.vm.synced_folder '.', '/vagrant', owner: 'www-data', group: 'www-data', :mount_options => ['dmode=777,fmode=777']
 
-  # Load up all the ansible
-  config.vm.provision :ansible do |ansible|
-    ansible.playbook = 'vagrant/ansible/playbook.yml'
-    ansible.inventory_path = 'vagrant/ansible/me'
-    ansible.limit = 'all'
+  # Use the provision script
+  config.vm.provision :shell do |shell|
 
-    # Pass the variables through!
-    ansible.extra_vars = $config
+    # Set a name for your vm
+    shell.args = "'vagrant-dev'"
+    shell.path = 'vagrant/provision.sh'
+    shell.env = $config
+
   end
+
 end

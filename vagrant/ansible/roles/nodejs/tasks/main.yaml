@@ -1,8 +1,0 @@
-# Install NodeJS to our server.
-- name: NodeJS | Install NodeJS
-  apt:
-    pkg: "{{ item }}"
-    state: installed
-  with_items:
-    - nodejs
-#    - nodejs-legacy

@@ -1,9 +1,0 @@
-# Some of our actions will require build essentials.
-- name: Memcache | Install the Memcache
-  apt:
-    pkg: "{{ item }}"
-    state: installed
-  with_items:
-    - php5-memcache
-    - memcached
-  when: php
