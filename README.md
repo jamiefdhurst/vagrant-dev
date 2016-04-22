@@ -9,6 +9,12 @@ doing so.
 To show greater transparency and allow for more in-depth configuration changes,
 the provisioning has been switched back to shell-based for Ubuntu 16.04 LTS.
 
+## Notes
+
+Please be aware the **vagrant-vbguest** plugin is a requirement at the moment. There
+is an issue with guest additions with both the Ubuntu and vagrant versions of the
+Xenial64 box. Hopefully this issue will be fixed in a later version.
+
 ## Support
 
 This environment currently supports the following software:
