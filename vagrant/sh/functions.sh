@@ -18,8 +18,8 @@ box_install_apache2() {
     apt-get -qq -y install apache2
     cp /vagrant/vagrant/env/apache2/apache2.conf /etc/apache2/apache2.conf
     cp /vagrant/vagrant/env/apache2/site.conf /etc/apache2/sites-available/vagrant.conf
-    sed -i "s/{DOCUMENT_ROOT}/$web_root_dir/g" /etc/apache2/sites-available/vagrant.conf
-    sed -i "s/{LOG_DIR}/$web_logs_dir/g" /etc/apache2/sites-available/vagrant
+    sed -i "s@{DOCUMENT_ROOT}@$web_root_dir@g" /etc/apache2/sites-available/vagrant.conf
+    sed -i "s@{LOG_DIR}@$web_logs_dir@g" /etc/apache2/sites-available/vagrant
     rm /etc/apache2/sites-enabled/*
     ln -s /etc/apache2/sites-available/vagrant /etc/apache2/sites-enabled/
     a2enmod proxy proxy_fcgi rewrite
@@ -75,8 +75,8 @@ box_install_nginx() {
     apt-get -qq -y install nginx
     cp /vagrant/vagrant/env/nginx/nginx.conf /etc/nginx/nginx.conf
     cp /vagrant/vagrant/env/nginx/site.conf /etc/nginx/sites-available/vagrant
-    sed -i "s/{DOCUMENT_ROOT}/$web_root_dir/g" /etc/nginx/sites-available/vagrant
-    sed -i "s/{LOG_DIR}/$web_logs_dir/g" /etc/nginx/sites-available/vagrant
+    sed -i "s@{DOCUMENT_ROOT}@${web_root_dir}@g" /etc/nginx/sites-available/vagrant
+    sed -i "s@{LOG_DIR}@${web_logs_dir}@g" /etc/nginx/sites-available/vagrant
     rm /etc/nginx/sites-enabled/*
     ln -s /etc/nginx/sites-available/vagrant /etc/nginx/sites-enabled/
     service nginx restart
@@ -86,7 +86,7 @@ box_install_nginx() {
 box_install_php() {
     output $BLUE "Installing PHP..."
     apt-get -qq -y install php-fpm php-cli php-curl php-gd php-json php-mcrypt php-mysql
-    sed -i "s/www\-data/vagrant/g" /etc/phpy/fpm/pool.d/www.conf
+    sed -i "s/www\-data/vagrant/g" /etc/php/7.0/fpm/pool.d/www.conf
     cp /vagrant/vagrant/env/php/php.ini /etc/php/7.0/cli/php.ini
     cp /vagrant/vagrant/env/php/php.ini /etc/php/7.0/fpm/php.ini
     service php7.0-fpm restart
@@ -109,7 +109,7 @@ box_install_ruby() {
 
 # Make sure the box stores a hidden file to say when it was installed
 box_register () {
-    echo 'Box provisioned - `date`' > /home/vagrant/.provisioned
+    echo 'Box provisioned - `date`' > /home/ubuntu/.provisioned
 }
 
 # Update the box - common functionality

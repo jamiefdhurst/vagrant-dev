@@ -3,12 +3,12 @@
 # Run full provision.
 
 # Already provisioned?
-if [ -e "/home/vagrant/.provisioned" ]; then
+if [ -e "/home/ubuntu/.provisioned" ]; then
     output $BLUE "Box already provisioned."; exit 0
 fi
 
-# --Require the functions file
-source /vagrant/env/functions.sh
+# Require the functions file
+source /vagrant/vagrant/sh/functions.sh
 
 # Standard requirements
 export DEBIAN_FRONTEND=noninteractive
@@ -23,7 +23,7 @@ elif [ $web_service == "nginx" ]; then
     box_install_nginx
 fi
 
-# Install database service
+# # Install database service
 if [ $db_service == "mariadb" ]; then
     box_install_mariadb
 elif [ $db_service == "mysql" ]; then
@@ -31,18 +31,18 @@ elif [ $db_service == "mysql" ]; then
 fi
 
 # Install PHP
-if [ $php ]; then
+if $php; then
     box_install_php
-    if [ $php_composer ]; then
+    if $php_composer; then
         box_install_php_composer
     fi
-    if [ $memcached ]; then
+    if $memcached; then
         box_install_memcached
     fi
 fi
 
 # Install Ruby
-if [ $ruby ]; then
+if $ruby; then
     box_install_ruby
 fi
 
