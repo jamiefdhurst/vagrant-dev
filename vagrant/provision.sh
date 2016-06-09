@@ -15,6 +15,7 @@ export DEBIAN_FRONTEND=noninteractive
 box_update
 box_install_curl
 box_install_git
+box_install_zip
 
 # Install web service
 if [ $web_service == "apache2" ]; then

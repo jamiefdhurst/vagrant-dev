@@ -9,7 +9,7 @@ BLUE="0;34"
 # Output a string with a colour
 # $1 - colour
 # $2 - string
-output () {
+output() {
     echo -e "\033[$1m[PROVISIONER] $2\033[0m"
 }
 
@@ -111,13 +111,19 @@ box_install_ruby() {
     output $GREEN "Ruby installed."
 }
 
+box_install_zip() {
+    output $BLUE "Installing Zip..."
+    apt-get -qq -y install zip
+    output $GREEN "Zip installed."
+}
+
 # Make sure the box stores a hidden file to say when it was installed
-box_register () {
+box_register() {
     echo 'Box provisioned - `date`' > /home/ubuntu/.provisioned
 }
 
 # Update the box - common functionality
-box_update () {
+box_update() {
 
     # Perform /etc/hosts fix
     sed -i "s@localhost@localhost ubuntu-xenial@g" /etc/hosts
