@@ -44,9 +44,10 @@ box_install_mariadb() {
     apt-get -qq -y install mariadb-server mariadb-client
     cp /vagrant/vagrant/env/mariadb/my.cnf /etc/mysql/my.cnf
     service mysql restart
-    mysqladmin -uroot password $db_password
+    mysqladmin -u root password $db_password
     echo "CREATE USER 'root'@'%' IDENTIFIED BY '$db_password';" | mysql -u root -p$db_password
     echo "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;" | mysql -u root -p$db_password
+    echo "DROP USER 'root'@'localhost';" | mysql -u root -p$db_password
     echo "FLUSH PRIVILEGES;" | mysql -u root -p$db_password
     output $GREEN "Mariadb installed and configured."
 }
@@ -63,9 +64,10 @@ box_install_mysql() {
     apt-get -qq -y install mysql-server mysql-client
     cp /vagrant/vagrant/env/mysql/my.cnf /etc/mysql/my.cnf
     service mysql restart
-    mysqladmin -uroot password $db_password
+    mysqladmin -u root password $db_password
     echo "CREATE USER 'root'@'%' IDENTIFIED BY '$db_password';" | mysql -u root -p$db_password
     echo "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;" | mysql -u root -p$db_password
+    echo "DROP USER 'root'@'localhost';" | mysql -u root -p$db_password
     echo "FLUSH PRIVILEGES;" | mysql -u root -p$db_password
     output $GREEN "MySQL installed and configured."
 }
@@ -85,8 +87,9 @@ box_install_nginx() {
 
 box_install_php() {
     output $BLUE "Installing PHP..."
-    apt-get -qq -y install php-fpm php-cli php-curl php-gd php-json php-mcrypt php-mysql
-    sed -i "s/www\-data/vagrant/g" /etc/php/7.0/fpm/pool.d/www.conf
+    apt-get -qq -y install php-fpm php-cli php-curl php-gd php-json php-mcrypt php-mysql php-xml
+    sed -i "s/^user\s\=\swww\-data/user = ubuntu/g" /etc/php/7.0/fpm/pool.d/www.conf
+    sed -i "s/^group\s\=\swww\-data/group = ubuntu/g" /etc/php/7.0/fpm/pool.d/www.conf
     cp /vagrant/vagrant/env/php/php.ini /etc/php/7.0/cli/php.ini
     cp /vagrant/vagrant/env/php/php.ini /etc/php/7.0/fpm/php.ini
     service php7.0-fpm restart
