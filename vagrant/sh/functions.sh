@@ -87,7 +87,8 @@ box_install_nginx() {
 
 box_install_php() {
     output $BLUE "Installing PHP..."
-    apt-get -qq -y install php-fpm php-cli php-curl php-gd php-json php-mcrypt php-mysql php-xml
+    apt-get -qq -y install php-fpm php-cli php-curl php-gd php-json php-mcrypt \
+        php-mysql php-xml php-mbstring
     sed -i "s/^user\s\=\swww\-data/user = ubuntu/g" /etc/php/7.0/fpm/pool.d/www.conf
     sed -i "s/^group\s\=\swww\-data/group = ubuntu/g" /etc/php/7.0/fpm/pool.d/www.conf
     cp /vagrant/vagrant/env/php/php.ini /etc/php/7.0/cli/php.ini
