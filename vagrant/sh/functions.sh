@@ -117,6 +117,10 @@ box_register () {
 
 # Update the box - common functionality
 box_update () {
+
+    # Perform /etc/hosts fix
+    sed -i "s@localhost@localhost ubuntu-xenial@g" /etc/hosts
+
     output $BLUE "Updating apt-get sources..."
     apt-get -qq -y update
     apt-get -qq -y upgrade
