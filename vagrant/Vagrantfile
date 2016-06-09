@@ -2,6 +2,9 @@ unless Vagrant.has_plugin?("vagrant-vbguest")
   raise 'vagrant-vbguest is not installed - please install before continuing'
 end
 
+require './vagrant/config'
+include VConfig
+
 Vagrant.require_version ">= 1.7"
 Vagrant.configure('2') do |config|
 
