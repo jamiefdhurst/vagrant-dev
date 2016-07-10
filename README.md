@@ -1,25 +1,20 @@
 # Vagrant PHP Development Environment
 
-**Now updated to support Ubuntu 16.04 LTS - Xenial Xerus!**
+**This is the Trusty Tahr (14.04) version. For the newest Xenial Xerus (16.04)
+version, [please see here](https://github.com/jamiefdhurst/vagrant-dev/tree/xenial).**
 
 This development environment is intended as a starter for those wanting to use
 Vagrant to develop PHP applications, and includes the necessary software for
 doing so.
 
 To show greater transparency and allow for more in-depth configuration changes,
-the provisioning has been switched back to shell-based for Ubuntu 16.04 LTS.
-
-## Notes
-
-Please be aware the **vagrant-vbguest** plugin is a requirement at the moment. There
-is an issue with guest additions with both the Ubuntu and vagrant versions of the
-Xenial64 box. Hopefully this issue will be fixed in a later version.
+the provisioning has been switched back to shell-based.
 
 ## Support
 
 This environment currently supports the following software:
 * Apache2 or Nginx as web server
-* PHP 7.0 (Ubuntu LTS latest)
+* PHP 5.5 (Ubuntu LTS latest)
 * MySQL or MariaDB [optional]
 * Memcached [optional]
 * Composer [optional]

@@ -15,8 +15,8 @@ Vagrant.configure('2') do |config|
     vb.name = File.basename(Dir.getwd)
   end
 
-  # Use Ubuntu LTS 16.04 x64
-  config.vm.box = 'ubuntu/xenial64'
+  # Use Ubuntu LTS 14.04 x64
+  config.vm.box = 'ubuntu/trusty64'
 
   # Set up network for HTTP/HTTPS and MySQL
   config.vm.network :forwarded_port, guest: 80, host: $config[:web_port]

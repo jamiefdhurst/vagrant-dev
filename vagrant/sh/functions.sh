@@ -87,13 +87,13 @@ box_install_nginx() {
 
 box_install_php() {
     output $BLUE "Installing PHP..."
-    apt-get -qq -y install php-fpm php-cli php-curl php-gd php-json php-mcrypt \
-        php-mysql php-xml php-mbstring
-    sed -i "s/^user\s\=\swww\-data/user = ubuntu/g" /etc/php/7.0/fpm/pool.d/www.conf
-    sed -i "s/^group\s\=\swww\-data/group = ubuntu/g" /etc/php/7.0/fpm/pool.d/www.conf
-    cp /vagrant/vagrant/env/php/php.ini /etc/php/7.0/cli/php.ini
-    cp /vagrant/vagrant/env/php/php.ini /etc/php/7.0/fpm/php.ini
-    service php7.0-fpm restart
+    apt-get -qq -y install php5-fpm php5-cli php5-curl php5-gd php5-json php5-mcrypt \
+        php5-mysql
+    sed -i "s/^user\s\=\swww\-data/user = vagrant/g" /etc/php5/fpm/pool.d/www.conf
+    sed -i "s/^group\s\=\swww\-data/group = vagrant/g" /etc/php5/fpm/pool.d/www.conf
+    cp /vagrant/vagrant/env/php/php.ini /etc/php5/cli/php.ini
+    cp /vagrant/vagrant/env/php/php.ini /etc/php5/fpm/php.ini
+    service php5-fpm restart
     output $GREEN "PHP installed and configured."
 }
 
@@ -124,9 +124,6 @@ box_register() {
 
 # Update the box - common functionality
 box_update() {
-
-    # Perform /etc/hosts fix
-    sed -i "s@localhost@localhost ubuntu-xenial@g" /etc/hosts
 
     output $BLUE "Updating apt-get sources..."
     apt-get -qq -y update
