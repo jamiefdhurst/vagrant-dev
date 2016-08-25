@@ -20,7 +20,7 @@ Vagrant.configure('2') do |config|
 
   # Set up network for HTTP/HTTPS and MySQL
   config.vm.network :forwarded_port, guest: 80, host: $config[:web_port]
-  # config.vm.network :forwarded_port, guest: 443, host: $config[:web_ssl_port]
+  config.vm.network :forwarded_port, guest: 443, host: $config[:web_ssl_port]
 
   if $config[:db_service] != '' # If database is set.
     config.vm.network :forwarded_port, guest: 3306, host: 3306

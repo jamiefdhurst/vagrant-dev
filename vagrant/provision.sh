@@ -50,4 +50,7 @@ fi
 # Register the box
 box_register
 
+# Setup SSL
+box_setup_ssl
+
 output $GREEN "Box provisioned."

@@ -88,7 +88,7 @@ box_install_nginx() {
 box_install_php() {
     output $BLUE "Installing PHP..."
     add-apt-repository ppa:ondrej/php
-    apt-get update
+    apt-get -qq -y update
     apt-get -qq -y install php7.0-fpm php7.0-cli php7.0-curl php7.0-gd php7.0-json php7.0-mcrypt \
         php7.0-mysql php7.0-xml php7.0-mbstring
     sed -i "s/^user\s\=\swww\-data/user = vagrant/g" /etc/php/7.0/fpm/pool.d/www.conf
@@ -122,6 +122,20 @@ box_install_zip() {
 # Make sure the box stores a hidden file to say when it was installed
 box_register() {
     echo 'Box provisioned - `date`' > /home/ubuntu/.provisioned
+}
+
+box_setup_ssl() {
+    cd /vagrant/vagrant/env/ssl
+    openssl genrsa -out server.key 2048
+    openssl genrsa -out localhost.key 2048
+    openssl rsa -in localhost.key -out localhost.key.rsa
+    openssl req -new -key server.key -subj "/C=/ST=/L=/O=/CN=/emailAddress=/" -out server.csr
+    openssl req -new -key localhost.key.rsa -subj "/C=GB/ST=Tyne+and+Wear/L=Newcastle/O=Local/CN=localhost/" -out localhost.csr -config localhost.conf
+    openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
+    openssl x509 -req -extensions v3_req -days 365 -in localhost.csr -signkey localhost.key.rsa -out localhost.crt -extfile localhost.conf
+    service nginx restart
+    echo 'SSL available, plus install on your local machine using:'
+    echo 'sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain ./vagrant/env/ssl/localhost.crt'
 }
 
 # Update the box - common functionality
