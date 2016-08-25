@@ -12,7 +12,7 @@ module VConfig
       web_service:      'nginx', # nginx|apache2
       web_port:         8080, # HTTP port forwards to this
       web_logs_dir:     '/vagrant/logs', # Server side path to logs
-      web_root_dir:     '/vagrant/public', # Local side path to the project content
+      web_root_dir:     '/vagrant/web', # Local side path to the project content
 
       # MySQL
       db_service:       'mysql', # mariadb|mysql

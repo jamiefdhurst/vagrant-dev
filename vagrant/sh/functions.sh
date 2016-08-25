@@ -87,13 +87,15 @@ box_install_nginx() {
 
 box_install_php() {
     output $BLUE "Installing PHP..."
-    apt-get -qq -y install php5-fpm php5-cli php5-curl php5-gd php5-json php5-mcrypt \
-        php5-mysql
-    sed -i "s/^user\s\=\swww\-data/user = vagrant/g" /etc/php5/fpm/pool.d/www.conf
-    sed -i "s/^group\s\=\swww\-data/group = vagrant/g" /etc/php5/fpm/pool.d/www.conf
-    cp /vagrant/vagrant/env/php/php.ini /etc/php5/cli/php.ini
-    cp /vagrant/vagrant/env/php/php.ini /etc/php5/fpm/php.ini
-    service php5-fpm restart
+    add-apt-repository ppa:ondrej/php
+    apt-get update
+    apt-get -qq -y install php7.0-fpm php7.0-cli php7.0-curl php7.0-gd php7.0-json php7.0-mcrypt \
+        php7.0-mysql php7.0-xml php7.0-mbstring
+    sed -i "s/^user\s\=\swww\-data/user = vagrant/g" /etc/php/7.0/fpm/pool.d/www.conf
+    sed -i "s/^group\s\=\swww\-data/group = vagrant/g" /etc/php/7.0/fpm/pool.d/www.conf
+    cp /vagrant/vagrant/env/php/php.ini /etc/php/7.0/cli/php.ini
+    cp /vagrant/vagrant/env/php/php.ini /etc/php/7.0/fpm/php.ini
+    service php7.0-fpm restart
     output $GREEN "PHP installed and configured."
 }
 
