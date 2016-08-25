@@ -19,6 +19,7 @@ This environment currently supports the following software:
 * Memcached [optional]
 * Composer [optional]
 * Ruby (rvm latest stable version) [optional]
+* Automatic SSL (available at https://localhost:8443)
 
 ## Configuration
 
